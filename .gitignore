@@ -1,0 +1,6 @@
+# training runs and checkpoints
+outputs/
+
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
