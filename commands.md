@@ -25,3 +25,49 @@ Side camera (USB port 10):
 ```bash
 v4l2-ctl -d /dev/v4l/by-path/pci-0000:00:14.0-usb-0:10:1.0-video-index0 -c exposure_dynamic_framerate=0,power_line_frequency=1
 ```
+
+## Phase 3: record the demos (2026-11-09)
+
+Round 1: 9 demos, dots 1 to 9, aligned. LeRobot adds the date and time to the dataset name.
+
+```bash
+lerobot-record \
+  --robot.type=so101_follower \
+  --robot.port=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B7B015577-if00 \
+  --robot.id=my_awesome_follower_arm \
+  --robot.cameras="{top: {type: opencv, index_or_path: /dev/v4l/by-path/pci-0000:00:14.0-usb-0:9:1.0-video-index0, width: 640, height: 480, fps: 30, fourcc: MJPG}, side: {type: opencv, index_or_path: /dev/v4l/by-path/pci-0000:00:14.0-usb-0:10:1.0-video-index0, width: 640, height: 480, fps: 30, fourcc: MJPG}}" \
+  --teleop.type=so101_leader \
+  --teleop.port=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B7B009251-if00 \
+  --teleop.id=my_awesome_leader_arm \
+  --dataset.repo_id=jaaaa000/so101_blue_sponge \
+  --dataset.single_task="Pick up the blue sponge and put it in the white tray." \
+  --dataset.num_episodes=9 \
+  --dataset.episode_time_s=30 \
+  --dataset.reset_time_s=20 \
+  --dataset.fps=30 \
+  --dataset.push_to_hub=false \
+  --display_data=false
+```
+
+Rounds 2 to 6: adds 9 demos to the same dataset each time. Round 2 is 45°, then aligned, 45°, aligned, 45°.
+
+```bash
+lerobot-record \
+  --robot.type=so101_follower \
+  --robot.port=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B7B015577-if00 \
+  --robot.id=my_awesome_follower_arm \
+  --robot.cameras="{top: {type: opencv, index_or_path: /dev/v4l/by-path/pci-0000:00:14.0-usb-0:9:1.0-video-index0, width: 640, height: 480, fps: 30, fourcc: MJPG}, side: {type: opencv, index_or_path: /dev/v4l/by-path/pci-0000:00:14.0-usb-0:10:1.0-video-index0, width: 640, height: 480, fps: 30, fourcc: MJPG}}" \
+  --teleop.type=so101_leader \
+  --teleop.port=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B7B009251-if00 \
+  --teleop.id=my_awesome_leader_arm \
+  --dataset.repo_id=jaaaa000/so101_blue_sponge_20261109_161302 \
+  --dataset.root=/home/user/.cache/huggingface/lerobot/jaaaa000/so101_blue_sponge_20261109_161302 \
+  --dataset.single_task="Pick up the blue sponge and put it in the white tray." \
+  --dataset.num_episodes=9 \
+  --dataset.episode_time_s=30 \
+  --dataset.reset_time_s=20 \
+  --dataset.fps=30 \
+  --dataset.push_to_hub=false \
+  --display_data=false \
+  --resume=true
+```
