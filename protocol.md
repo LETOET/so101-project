@@ -14,7 +14,8 @@ Fixed before training by scripts/make_trial_order.py, seed 42.
 Blocks of 3 trials, alternating models in the pattern A B B A.
 
 ## One trial
-Start: arm in the folded pose, sponge centred on the dot.
+Start: arm in the folded pose. The sponge's corner nearest me on the left goes on the dot; at 45° that corner stays on the dot and the sponge turns clockwise.
+Dots are numbered from the row nearest me, left to right (1–3), then moving away from me (4–6, 7–9).
 Time limit: 30 s. No restarts: the first attempt counts.
 Every trial is filmed.
 
