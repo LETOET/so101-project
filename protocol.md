@@ -104,3 +104,10 @@ Note: yellow stands out less from the light table than blue, so a failure can al
 ### SmolVLA trained on the first recording (18 trials)
 Blue sponge. The 18 SmolVLA placements of the test, in the same order.
 Same command as SmolVLA in the test, with outputs/smolvla_blue_sponge. My bet: 5 of 18.
+
+### Yellow sponge, sentence changed (decided after the 8 yellow trials, before running these)
+All 8 yellow trials failed (ACT 0 of 4, SmolVLA 0 of 4). ACT came close to the sponge; SmolVLA did not.
+4 SmolVLA v2 trials, yellow sponge, dots 1, 3, 7 and 9 aligned, in that order,
+task sentence "Pick up the yellow sponge and put it in the white tray."
+Question: can the word "yellow" make SmolVLA find the sponge?
+My bet: SmolVLA 4 of 4.
