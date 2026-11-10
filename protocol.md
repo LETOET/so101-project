@@ -111,3 +111,21 @@ All 8 yellow trials failed (ACT 0 of 4, SmolVLA 0 of 4). ACT came close to the s
 task sentence "Pick up the yellow sponge and put it in the white tray."
 Question: can the word "yellow" make SmolVLA find the sponge?
 My bet: SmolVLA 4 of 4.
+
+
+## Follow-up: 18 demos (written 10 November 2026, before training)
+
+Question: does SmolVLA's pretraining help when demos are scarce? With 53 demos both models were at the ceiling (16/18 and 18/18).
+
+- Data: the second recording, episodes 18–35 only (rounds 3 and 4: every dot once aligned and once at 45°), 18 demos.
+  I chose these rounds before training, because they are the middle of the recording session: by then I had practised
+  (rounds 1–2) and I was not yet tired (rounds 5–6).
+- Training: same settings as the test models (30,000 steps, batch 8). Only the number of demos changes.
+- Test: the same 36 trials in the same order (results/trial_order.csv), same lamp light, same codes, 30 s limit and inference settings. Results go to results/demos18_trials.csv.
+- Verdict: same rule, a gap of at least 2 gap-margins. If the gap is 4 or 5, I run 18 more trials per model in the same order.
+- Bets: ACT 10 of 18, SmolVLA 15 of 18.
+  Both models will perform worse because they have less varied data to train on. They will overfit on a few
+  demonstrations, and a small difference at test time can already be out of distribution.
+  I suspect ACT will have more trouble, because with 53 demos it already had more trouble picking the sponge up and
+  often barely made it. SmolVLA will also drop for the same reason, but less, because it was a little more robust with
+  53 demos. On top of that, I think the pretrained action head will help keep its performance high.
