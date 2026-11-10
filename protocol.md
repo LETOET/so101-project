@@ -122,7 +122,8 @@ Question: does SmolVLA's pretraining help when demos are scarce? With 53 demos b
   (rounds 1–2) and I was not yet tired (rounds 5–6).
 - Training: same settings as the test models (30,000 steps, batch 8). Only the number of demos changes.
 - Test: the same 36 trials in the same order (results/trial_order.csv), same lamp light, same codes, 30 s limit and inference settings. Results go to results/demos18_trials.csv.
-- Verdict: same rule, a gap of at least 2 gap-margins. If the gap is 4 or 5, I run 18 more trials per model in the same order.
+- Verdict: same rule, a gap of at least 2 gap-margins. If the gap is 4 or 5, I run 18 more trials per model in the same order
+  (results/demos18_more_trials.csv); the verdict then uses all 36 trials per model, with the same rule.
 - Bets: ACT 10 of 18, SmolVLA 15 of 18.
   Both models will perform worse because they have less varied data to train on. They will overfit on a few
   demonstrations, and a small difference at test time can already be out of distribution.
