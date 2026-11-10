@@ -69,3 +69,22 @@ ACT 9 of 18, SmolVLA 10 of 18.
 SmolVLA trained on the first recording (my bet: 5 of 18).
 Both models retrained with image augmentation, as a follow-up.
 New demonstrations in daylight. Then do augmented training on both sets.
+
+## Additions on 10 November 2026, after the 36 counted trials
+Written after seeing the results and before watching the video. Not pre-registered.
+
+### Which code when one problem leads to another
+The code is the first thing that went wrong.
+T only when nothing went wrong but the robot was too slow.
+A missed approach: the gripper closes beside the sponge, not around it.
+G failed grasp: the gripper closes around the sponge, but the sponge slips out.
+Why: trials 25 and 27 had the same problem (gripper beside the sponge, closing pushed it away)
+but I coded them A and G during the test. results/trials.csv keeps the codes as typed;
+the codes checked against these rules go in results/video_review.csv.
+
+### Grasp quality (a second measure, for all 36 trials)
+Scored by me from the phone video. Not blind: I knew which model ran each trial.
+clean: the gripper closes around the sponge's sides on the first try.
+marginal: it held the sponge in the end, but the first grasp was at the edge or on top,
+pushed or flipped the sponge, or it needed a second try.
+failed: it never held the sponge.
