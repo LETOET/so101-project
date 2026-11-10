@@ -88,3 +88,19 @@ clean: the gripper closes around the sponge's sides on the first try.
 marginal: it held the sponge in the end, but the first grasp was at the edge or on top,
 pushed or flipped the sponge, or it needed a second try.
 failed: it never held the sponge.
+
+## Extra tests, 10 November 2026, written before the first extra trial
+Codes and the coding rule as in the additions after the 36 counted trials.
+Orders in results/yellow_order.csv and results/smolvla_v1_order.csv.
+
+### Yellow sponge (8 trials)
+ACT v2 and SmolVLA v2, 4 trials each on dots 1, 3, 7 and 9, all aligned.
+Task sentence unchanged ("blue sponge"). Order in blocks of 2: ACT, SmolVLA, SmolVLA, ACT.
+My bets: ACT 1 of 4, SmolVLA 4 of 4.
+Why: ACT has only ever seen a blue sponge, so it may not find a yellow one.
+SmolVLA can generalise: it reads the sentence and can work out that the sponge is now yellow.
+Note: yellow stands out less from the light table than blue, so a failure can also come from contrast.
+
+### SmolVLA trained on the first recording (18 trials)
+Blue sponge. The 18 SmolVLA placements of the test, in the same order.
+Same command as SmolVLA in the test, with outputs/smolvla_blue_sponge. My bet: 5 of 18.

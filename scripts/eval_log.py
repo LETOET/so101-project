@@ -1,15 +1,16 @@
-# Asks for the outcome of each test trial and saves it to results/trials.csv.
-# Run it from the project root: python scripts/eval_log.py
+# Asks for the outcome of each test trial and saves it to <results file>.
+# Run it from the project root: python scripts/eval_log.py <order file> <results file>
 
 import csv
 import os
+import sys
 from datetime import datetime
 
 # 1. Read the fixed trial order.
-with open("results/trial_order.csv", newline="") as f:
+with open(sys.argv[1], newline="") as f:
     trials = list(csv.DictReader(f))
 
-path = "results/trials.csv"
+path = sys.argv[2]
 columns = ["trial", "dot", "angle", "model", "code", "timestamp"]
 
 # 2. Find the trials already saved: after a crash it carries on from there.
