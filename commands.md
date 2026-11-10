@@ -71,3 +71,20 @@ lerobot-record \
   --display_data=false \
   --resume=true
 ```
+
+
+## Test (2026-11-10)
+
+Run from ~/so101-project. One run per trial; type the outcome into scripts/eval_log.py in a second terminal.
+
+ACT:
+
+```bash
+lerobot-rollout --strategy.type=base --policy.path=outputs/act_blue_sponge_v2/checkpoints/last/pretrained_model --policy.n_action_steps=1 --policy.temporal_ensemble_coeff=0.01 --robot.type=so101_follower --robot.port=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B7B015577-if00 --robot.id=my_awesome_follower_arm --robot.cameras="{top: {type: opencv, index_or_path: /dev/v4l/by-path/pci-0000:00:14.0-usb-0:9:1.0-video-index0, width: 640, height: 480, fps: 30, fourcc: MJPG}, side: {type: opencv, index_or_path: /dev/v4l/by-path/pci-0000:00:14.0-usb-0:10:1.0-video-index0, width: 640, height: 480, fps: 30, fourcc: MJPG}}" --task="Pick up the blue sponge and put it in the white tray." --duration=30
+```
+
+SmolVLA:
+
+```bash
+lerobot-rollout --strategy.type=base --inference.type=rtc --policy.path=outputs/smolvla_blue_sponge_v2/checkpoints/last/pretrained_model --rename_map='{"observation.images.top": "observation.images.camera1", "observation.images.side": "observation.images.camera3"}' --robot.type=so101_follower --robot.port=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B7B015577-if00 --robot.id=my_awesome_follower_arm --robot.cameras="{top: {type: opencv, index_or_path: /dev/v4l/by-path/pci-0000:00:14.0-usb-0:9:1.0-video-index0, width: 640, height: 480, fps: 30, fourcc: MJPG}, side: {type: opencv, index_or_path: /dev/v4l/by-path/pci-0000:00:14.0-usb-0:10:1.0-video-index0, width: 640, height: 480, fps: 30, fourcc: MJPG}}" --task="Pick up the blue sponge and put it in the white tray." --duration=30
+```
