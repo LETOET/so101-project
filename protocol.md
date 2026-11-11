@@ -143,3 +143,6 @@ Coding addition (11 November 2026, after the 18-demo trials, before watching the
 
 
 ACT trained on the first recording (added 11 November 2026, before its first trial): outputs/act_blue_sponge, the 52 rushed demos of the first recording, the same 30,000 steps and settings as the test ACT, run with temporal ensembling as in the test. 18 trials: the same placements in the same order as SmolVLA trained on the first recording (results/act_v1_order.csv). Results go to results/act_v1_trials.csv. It is compared with SmolVLA’s 7 of 18 from 10 November. Before this, this model only had 12 uncounted pilot tries (3 of 12). My bet: ACT 5 of 18.
+
+
+Coding addition (11 November 2026, after the ACT trials on the first recording, before the review): F frozen on the way: the robot holds the sponge, stops in mid-air and never reaches the tray. Not T, because more time would not have helped. The review goes in results/act_v1_video_review.csv.
