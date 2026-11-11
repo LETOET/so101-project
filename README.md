@@ -1,3 +1,5 @@
+
+
 # ACT vs SmolVLA on a real SO-101
 
 In this experiment I compare a specialist model (ACT, trained from scratch) against a robot-pretrained
@@ -6,9 +8,7 @@ a low-cost SO-101 arm and train on my own machine.
 
 Task: *"Pick up the blue sponge and put it in the white tray."*
 
-<!-- VIDEO: the 60 s video goes here. -->
-
-<img src="media/setup.jpg" alt="The setup: SO-101 arm, top and side webcam, tray" width="420">
+https://github.com/user-attachments/assets/325f4311-dcac-4d5f-81f6-62c1d3695266
 
 ## Results
 
@@ -73,3 +73,5 @@ Every command I ran is in [commands.md](commands.md). The raw results are in [re
 - A rigid object instead of a sponge, to see whether the sponge hid imprecise grasps.
 - Retraining with image augmentation, so small camera shifts matter less.
 
+
+<img src="media/setup.jpg" alt="The setup: SO-101 arm, top and side webcam, tray" width="420">
