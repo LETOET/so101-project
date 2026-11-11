@@ -26,6 +26,20 @@ Side camera (USB port 10):
 v4l2-ctl -d /dev/v4l/by-path/pci-0000:00:14.0-usb-0:10:1.0-video-index0 -c exposure_dynamic_framerate=0,power_line_frequency=1
 ```
 
+## Teleoperate (no recording)
+
+Moves the follower arm with the leader arm. Records nothing. Stop with Ctrl+C.
+
+```bash
+lerobot-teleoperate \
+  --robot.type=so101_follower \
+  --robot.port=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B7B015577-if00 \
+  --robot.id=my_awesome_follower_arm \
+  --teleop.type=so101_leader \
+  --teleop.port=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B7B009251-if00 \
+  --teleop.id=my_awesome_leader_arm
+```
+
 ## Phase 3: record the demos (2026-11-09)
 
 Round 1: 9 demos, dots 1 to 9, aligned. LeRobot adds the date and time to the dataset name.
@@ -209,7 +223,7 @@ lerobot-train \
   --wandb.disable_artifact=true
 ```
 
-## Test (2026-11-10)
+## Test (2026-11-10) Rollout v2
 
 Run from ~/so101-project. One run per trial; type the outcome into scripts/eval_log.py in a second terminal.
 

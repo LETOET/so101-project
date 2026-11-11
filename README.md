@@ -1,5 +1,3 @@
-
-
 # ACT vs SmolVLA on a real SO-101
 
 In this experiment I compare a specialist model (ACT, trained from scratch) against a robot-pretrained
