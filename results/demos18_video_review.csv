@@ -1,0 +1,37 @@
+trial,code,grasp,note
+1,S,clean,no problems noted
+2,A,failed,hovered above the sponge but didn't close
+3,A,failed,did not reach far enough and came down just beside the sponge; closing pushed it further away; never recovered
+4,S,clean,no problems noted
+5,G,failed,no close: reached well and was in place above the sponge but never closed the gripper; would have worked if it had closed
+6,S,clean,no problems noted
+7,S,marginal,came down on top and pushed the sponge; it flipped inside the gripper; still closed and delivered it
+8,S,clean,no problems noted
+9,S,marginal,reached correctly but had much more trouble opening the gripper and gripping; only just made it in time
+10,S,clean,no problems noted
+11,S,clean,no problems noted
+12,S,clean,no problems noted
+13,S,clean,no problems noted
+14,A,marginal,came down just beside the sponge; closing pushed it about 3 mm away; then re-grasped it correctly but the time ran out on the way to the tray
+15,S,marginal,came down on top; the sponge turned as the gripper went down; no risk of losing it
+16,S,clean,no problems noted
+17,A,failed,did not reach far enough; closing beside the sponge pushed it further away; would almost have had it with a normal close; check on video (A or G)
+18,A,failed,came down on top 1 cm from the corner and the sponge flipped; then never closed; closing would not have held it
+19,G,failed,no open: aligned right above the sponge but never opened the gripper; hovered there until the time ran out
+20,A,failed,aligned at first; came down on top and pushed the sponge a little; never got back to it
+21,S,marginal,aligned but did not open well; touched the top a little; still grasped it
+22,S,clean,no problems noted
+23,S,clean,no problems noted
+24,S,clean,no problems noted
+25,S,marginal,came down on top but still grasped it and delivered it
+26,A,failed,typed G; A by the coding rule: reached well but came down on top while opening and pushed the sponge away; never reached it again
+27,S,clean,no problems noted
+28,S,clean,no problems noted
+29,S,clean,no problems noted
+30,S,clean,no problems noted
+31,S,clean,no problems noted
+32,A,failed,did not reach properly
+33,A,failed,typed G; A by the coding rule: came down on top 2 cm into the sponge and pushed it away while reaching further; then never closed
+34,S,clean,no problems noted
+35,T,marginal,typed G; T by the coding rule: reached well and held the sponge with the gripper not fully closed; hesitated there; closed further and the time ran out; going to the tray would have worked
+36,S,marginal,came down on top and the sponge flipped; still grasped it and delivered it
