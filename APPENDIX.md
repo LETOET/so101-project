@@ -61,6 +61,10 @@ matching-body case on real hardware.
 Two demos of the first recording turned the wrist the other way at 45° and were left out. One demo of the second
 recording closed the gripper again after the release and was left out.
 
+In the first recording, 24 % of all frames come after the release, while the arm drives back home. 15 % of those
+frames lie on the carry path to the tray, running the other way, so the same arm position is followed by opposite
+moves. The second recording has no frames after the release.
+
 ## Models and training
 
 | | ACT | SmolVLA |
@@ -77,7 +81,7 @@ every 30 seconds while it computed its next chunk (325 ms each).
 ## Protocol
 
 The full protocol is in [protocol.md](protocol.md). It was committed before the first training run. Every later
-addition is dated in the file and was committed before the trials it covers, except two coding rules that were
+addition is dated in the file and was committed before the trials it covers, except three coding rules that were
 written after a test and before reviewing it; those are marked as such.
 
 - **18 trials per model:** 9 dots × 2 angles (aligned, 45°), in a seeded order
@@ -86,7 +90,8 @@ written after a test and before reviewing it; those are marked as such.
   equally.
 - **One attempt per trial, 30 s limit.** Success means the whole sponge in the tray and released.
 - **Failure codes,** the first thing that went wrong: `A` missed approach, `G` failed grasp, `D` dropped on the way,
-  `M` missed the tray, `T` timeout.
+  `M` missed the tray, `T` timeout, and `F` frozen on the way (holds the sponge but stops in mid-air; added after the
+  test of ACT on the rushed recording).
 - **Verdict rule:** a model's margin is √(n·p·(1−p)) trials; I believe a gap between the models only if it is at least
   2 × √(m_ACT² + m_SmolVLA²), about 6 of 18.
 - **Bets** for each test were written in the protocol before it ran.
@@ -100,7 +105,8 @@ written after a test and before reviewing it; those are marked as such.
 | ACT | 16/18 | ±1.3 | 13 / 3 / 2 | 2 × A |
 | SmolVLA | 18/18 | ±0 by the formula* | 13 / 5 / 0 | none |
 
-Gap 2; a believable gap needs at least 2.7. No believable difference: both models are at the ceiling of this test.
+Gap 2; my margin rule needs a gap of at least 2.7. No significant difference: both models are at the ceiling of this
+test (see [Is the difference significant?](#is-the-difference-significant)).
 
 \* At 100 % the formula gives 0. The exact 95 % lower bound for 18 of 18 is about 81 %.
 
@@ -119,12 +125,34 @@ dot once aligned and once at 45°), with the same settings, and ran the same 36 
 | ACT | 16/18 | 13/18 | ±1.9 | 10 / 5 / 3 | 3 × A, 1 × G, 1 × T |
 | SmolVLA | 18/18 | 11/18 | ±2.1 | 8 / 3 / 7 | 5 × A, 2 × G |
 
-- **ACT against SmolVLA with 18 demos:** gap 2; a believable gap needs at least 5.6. No believable difference.
+- **ACT against SmolVLA with 18 demos:** gap 2; my margin rule needs a gap of at least 5.6. No significant difference.
 - **Both did worse with fewer demos,** SmolVLA the most (18 → 11). This comparison runs across two days and wasn't part
   of the pre-registered verdict, so I report it as an observation.
 - **A new failure:** the gripper standing in place above the sponge without closing or opening (SmolVLA twice, ACT
   once). It didn't happen in any counted trial with 53 demos.
 - **Noticed afterwards (not pre-registered):** all 5 ACT failures were on aligned placements (4/9 aligned, 9/9 at 45°).
+
+### Is the difference significant?
+
+I checked it two ways, and they agree: no.
+
+| Test | ACT | SmolVLA | Gap | Gap my rule needs | Fisher's exact test |
+|---|---|---|---|---|---|
+| Main test, 53 demos | 16/18 | 18/18 | 2 | 2.7 | p = 0.49 |
+| 18 demos | 13/18 | 11/18 | 2 | 5.6 | p = 0.72 |
+
+**My margin rule** (fixed before testing): a model's margin is $m = \sqrt{n\,p\,(1-p)}$ trials, with $n$ trials and
+success rate $p$. I only believe a gap between the models if it is at least $2\sqrt{m_\text{ACT}^2 + m_\text{SmolVLA}^2}$.
+
+**Fisher's exact test** asks: if both models were equally good, how likely is a split at least this uneven? With
+$n = 18$ trials per model, $x$ successes for ACT and $s$ successes in total, the chance of one particular split is
+
+$$P(x) = \frac{\binom{n}{x}\binom{n}{s-x}}{\binom{2n}{s}}$$
+
+The p-value adds up $P$ over every split that is as unlikely as the one I saw, or more. A difference counts as
+significant when $p < 0.05$. Here $p$ is 0.49 and 0.72: a gap of 2 out of 18 easily happens by chance.
+
+The two tests on the rushed recording (ACT 0/18, SmolVLA 7/18) ran on different days, so I don't test that pair.
 
 Codes and grasp quality for this test come from my notes during the trials
 ([demos18_video_review.csv](results/demos18_video_review.csv)).
@@ -142,7 +170,7 @@ trials the 18-demo models scored 6/9 each. So the setup change alone doesn't exp
 |---|---|---|---|
 | Yellow sponge, same 4 corner placements, sentence unchanged | 0/4 | 0/4 | blue sponge on the same placements: 4/4 and 4/4 |
 | Yellow sponge, sentence says "yellow" (decided after the 0/8) | not run | 0/4 | |
-| SmolVLA trained on the rushed first recording | not run | 7/18 | careful recording: 18/18 |
+| Trained on the rushed first recording | 0/18 | 7/18 | careful recording: 16/18 and 18/18 |
 
 - With the yellow sponge, ACT came close and just missed it; SmolVLA did not even come close. With "yellow" in the
   sentence, SmolVLA often didn't go down to the sponge at all. ACT has no language input, so the sentence test was
@@ -151,24 +179,32 @@ trials the 18-demo models scored 6/9 each. So the setup change alone doesn't exp
   ever saw one blue sponge and one sentence. The backbone still "knows" yellow, but the part that turns what it sees
   into movement never learned to use it.
 - Yellow also stands out less against the light table than blue, so contrast may play a part.
-- SmolVLA on the rushed recording failed at the approach (4 × A) and the grasp (6 × G), exactly the manoeuvres I
-  rushed, and missed the tray once (1 × M).
+- On the rushed recording the two models failed in different ways. SmolVLA failed at the approach (4 × A) and the
+  grasp (6 × G), exactly the manoeuvres I rushed, and missed the tray once (1 × M). ACT held the sponge in 11 of 18
+  trials, then froze in mid-air and never reached the tray (10 × F; 8 × A). Most likely cause: the way home in those
+  demos passes the same arm positions as the way to the tray, in the opposite direction (see
+  [Demonstrations](#demonstrations)). Why SmolVLA didn't freeze I haven't tested.
+- The two rushed-recording tests ran on different days (SmolVLA on 10 November, ACT on 11 November), not
+  interleaved, so I don't compare the two models there. Before this, ACT on the rushed recording only had 12
+  uncounted pilot tries (3 of 12).
 
 ### All counted outcomes
 
-| Test | Model | S | A | G | D | M | T |
-|---|---|---|---|---|---|---|---|
-| Main, 53 demos | ACT | 16 | 2 | | | | |
-| Main, 53 demos | SmolVLA | 18 | | | | | |
-| 18 demos | ACT | 13 | 3 | 1 | | | 1 |
-| 18 demos | SmolVLA | 11 | 5 | 2 | | | |
-| Rushed recording | SmolVLA | 7 | 4 | 6 | | 1 | |
-| Yellow sponge | ACT | 0 | 2 | 1 | 1 | | |
-| Yellow sponge | SmolVLA | 0 | 3 | 1 | | | |
-| Yellow sponge, "yellow" sentence | SmolVLA | 0 | 4 | | | | |
+| Test | Model | S | A | G | D | M | T | F |
+|---|---|---|---|---|---|---|---|---|
+| Main, 53 demos | ACT | 16 | 2 | | | | | |
+| Main, 53 demos | SmolVLA | 18 | | | | | | |
+| 18 demos | ACT | 13 | 3 | 1 | | | 1 | |
+| 18 demos | SmolVLA | 11 | 5 | 2 | | | | |
+| Rushed recording | ACT | 0 | 8 | | | | | 10 |
+| Rushed recording | SmolVLA | 7 | 4 | 6 | | 1 | | |
+| Yellow sponge | ACT | 0 | 2 | 1 | 1 | | | |
+| Yellow sponge | SmolVLA | 0 | 3 | 1 | | | | |
+| Yellow sponge, "yellow" sentence | SmolVLA | 0 | 4 | | | | | |
 
-The main test and the 18-demo test use the codes after the coding rule ([video_review.csv](results/video_review.csv),
-[demos18_video_review.csv](results/demos18_video_review.csv)); the other rows are the codes as typed during the test.
+The main test, the 18-demo test and ACT on the rushed recording use the codes after the coding rule
+([video_review.csv](results/video_review.csv), [demos18_video_review.csv](results/demos18_video_review.csv),
+[act_v1_video_review.csv](results/act_v1_video_review.csv)); the other rows are the codes as typed during the test.
 
 ### My bets against the results
 
@@ -180,10 +216,12 @@ The main test and the 18-demo test use the codes after the coding rule ([video_r
 | SmolVLA, yellow sponge | 4/4 | 0/4 |
 | SmolVLA, "yellow" sentence | 4/4 | 0/4 |
 | SmolVLA, rushed recording | 5/18 | 7/18 |
+| ACT, rushed recording | 5/18 | 0/18 |
 | ACT, 18 demos | 10/18 | 13/18 |
 | SmolVLA, 18 demos | 15/18 | 11/18 |
 
-I underestimated both models on careful data and overestimated SmolVLA's ability to generalise.
+I underestimated both models on careful data, and overestimated SmolVLA's ability to generalise and ACT on the rushed
+data.
 
 ## Other findings
 
@@ -198,7 +236,8 @@ I underestimated both models on careful data and overestimated SmolVLA's ability
 - **Small samples.** 18 trials per model can only show gaps of about 6 or more.
 - **Not blind.** I placed the sponge, judged every trial, and knew which model was running.
 - **Rushed against careful demos:** the light changed too (daylight against the lamp), so this comparison can't fully
-  separate demo quality from light. SmolVLA on the rushed recording also ran on a different afternoon, not interleaved.
+  separate demo quality from light. The two tests on the rushed recording also ran on different days (SmolVLA on 10
+  November, ACT on 11 November), not interleaved with each other or with the careful-demo tests.
 - **Cameras:** the side camera sat a few pixels off its demo position during all tests. Both cameras had moved a few
   pixels more by the 18-demo test, and the top camera moved about 5 pixels during it. The setup control checks the
   effect on the 53-demo models; the two models within each test were always interleaved.
@@ -208,8 +247,9 @@ I underestimated both models on careful data and overestimated SmolVLA's ability
 - **Training budget:** the 18-demo models used the same 30,000 steps as the 53-demo models, so they saw each demo about
   3× as often. I did not tune anything for the smaller set.
 - **Rules added after a test:** the rule for which code to use when one problem leads to another, and the grasp-quality
-  scale, were written after the main test but before watching its video. The yellow-sentence test was decided after the
-  yellow results. All are marked as such in the protocol.
+  scale, were written after the main test but before watching its video. The codes for "never closes" (G) and "frozen
+  on the way" (F) were added after the tests where they first appeared, before reviewing them. The yellow-sentence
+  test was decided after the yellow results. All are marked as such in the protocol.
 - **Pilot tries:** 16 uncounted tries before the main test fixed the inference settings (listed in the protocol).
 - **No image augmentation** during training, so absolute pixel positions were a reliable cue for both models.
 - **One object, one tray position, one light.** Nothing here says how the models generalise beyond that.
