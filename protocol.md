@@ -124,6 +124,10 @@ Question: does SmolVLA's pretraining help when demos are scarce? With 53 demos b
 - Test: the same 36 trials in the same order (results/trial_order.csv), same lamp light, same codes, 30 s limit and inference settings. Results go to results/demos18_trials.csv.
 - Verdict: same rule, a gap of at least 2 gap-margins. If the gap is 4 or 5, I run 18 more trials per model in the same order
   (results/demos18_more_trials.csv); the verdict then uses all 36 trials per model, with the same rule.
+- Margin at 0 % or 100 % (added 11 November 2026, before the first trial of this follow-up): for a model that fails or
+  succeeds in all of its trials, the margin formula gives 0, as if luck played no part. In that case I compute that
+  model's margin as if one trial had gone the other way (for example 17 of 18 instead of 18 of 18). Its score and the
+  gap stay as they are.
 - Bets: ACT 10 of 18, SmolVLA 15 of 18.
   Both models will perform worse because they have less varied data to train on. They will overfit on a few
   demonstrations, and a small difference at test time can already be out of distribution.
