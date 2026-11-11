@@ -134,3 +134,5 @@ Question: does SmolVLA's pretraining help when demos are scarce? With 53 demos b
   I suspect ACT will have more trouble, because with 53 demos it already had more trouble picking the sponge up and
   often barely made it. SmolVLA will also drop for the same reason, but less, because it was a little more robust with
   53 demos. On top of that, I think the pretrained action head will help keep its performance high.
+
+  Setup control (added 11 November 2026, before the first trial of this follow-up): since the main test both cameras have moved a few pixels (top about 3, side about 4) and the GPU driver was updated. Before the 18-demo trials I run the two 53-demo models of the main test on trials 1–18 of results/trial_order.csv (9 per model; in the main test these were 9 of 9 and 9 of 9). Results go to results/control53_trials.csv and are reported separately. If either model scores 6 of 9 or lower, I stop and fix the camera positions before the 18-demo test. My bet: ACT 0 of 9, SmolVLA 9 of 9.
