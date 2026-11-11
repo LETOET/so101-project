@@ -137,3 +137,6 @@ Question: does SmolVLA's pretraining help when demos are scarce? With 53 demos b
 
   Setup control (added 11 November 2026, before the first trial of this follow-up): since the main test both cameras have moved a few pixels (top about 3, side about 4) and the GPU driver was updated. Before the 18-demo trials I run the two 53-demo models of the main test on trials 1–18 of results/trial_order.csv (9 per model; in the main test these were 9 of 9 and 9 of 9). Results go to results/control53_trials.csv and are reported separately. If either model scores 6 of 9 or lower, I stop and fix the camera positions before the 18-demo test. 
   My bet: ACT 9 of 9, SmolVLA 9 of 9. I don't think that a deviation of 3 or 4 pixels will affect the policies. With 480 pixels in height 3 pixel difference is 0.6% difference only. In width at 640 pixels and 4 pixels difference that is 0.6%. So no significant drop in performance i expect.
+
+
+Coding addition (11 November 2026, after the 18-demo trials, before watching the video): G failed grasp also covers a gripper that is in place above the sponge but never closes, or never opens (trials 5 and 19). The video review writes “no close” or “no open” in the note.
