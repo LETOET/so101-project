@@ -1,0 +1,17 @@
+trial,system,sentence_nr,sentence,blue_dot,red_dot
+1,SmolVLA,1,Place the blue sponge into the tray on the left.,L1,R1
+2,SmolVLA,4,Place the red sponge into the tray on the right.,R2,L3
+3,SmolVLA,4,Place the red sponge into the tray on the right.,L1,R3
+4,SmolVLA,2,Place the blue sponge into the tray on the right.,R2,L3
+5,SmolVLA,3,Place the red sponge into the tray on the left.,L3,R2
+6,SmolVLA,3,Place the red sponge into the tray on the left.,L3,R1
+7,SmolVLA,3,Place the red sponge into the tray on the left.,R3,L1
+8,SmolVLA,1,Place the blue sponge into the tray on the left.,L2,R2
+9,SmolVLA,2,Place the blue sponge into the tray on the right.,L3,R1
+10,SmolVLA,4,Place the red sponge into the tray on the right.,R2,L2
+11,SmolVLA,1,Place the blue sponge into the tray on the left.,R3,L2
+12,SmolVLA,4,Place the red sponge into the tray on the right.,L3,R1
+13,SmolVLA,2,Place the blue sponge into the tray on the right.,R1,L1
+14,SmolVLA,2,Place the blue sponge into the tray on the right.,L1,R3
+15,SmolVLA,3,Place the red sponge into the tray on the left.,L2,R2
+16,SmolVLA,1,Place the blue sponge into the tray on the left.,L1,R3

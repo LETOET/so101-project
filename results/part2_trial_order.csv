@@ -1,0 +1,73 @@
+trial,block,system,sentence_nr,sentence,blue_dot,red_dot,placement
+1,1,ACT x4,2,Put the blue sponge in the right tray.,L1,R1,seen
+2,1,ACT x4,2,Put the blue sponge in the right tray.,R2,L3,seen
+3,1,ACT x4,2,Put the blue sponge in the right tray.,R1,L3,seen
+4,1,SmolVLA,2,Put the blue sponge in the right tray.,L1,R1,seen
+5,1,SmolVLA,2,Put the blue sponge in the right tray.,R2,L3,seen
+6,1,SmolVLA,2,Put the blue sponge in the right tray.,R1,L3,seen
+7,2,SmolVLA,3,Put the red sponge in the left tray.,L2,R3,seen
+8,2,SmolVLA,3,Put the red sponge in the left tray.,R2,L2,seen
+9,2,SmolVLA,4,Put the red sponge in the right tray.,R2,L3,seen
+10,2,ACT x4,3,Put the red sponge in the left tray.,L2,R3,seen
+11,2,ACT x4,3,Put the red sponge in the left tray.,R2,L2,seen
+12,2,ACT x4,4,Put the red sponge in the right tray.,R2,L3,seen
+13,3,ACT x4,2,Put the blue sponge in the right tray.,R3,L2,seen
+14,3,ACT x4,2,Put the blue sponge in the right tray.,R2,L1,new
+15,3,ACT x4,3,Put the red sponge in the left tray.,L1,R1,seen
+16,3,SmolVLA,2,Put the blue sponge in the right tray.,R3,L2,seen
+17,3,SmolVLA,2,Put the blue sponge in the right tray.,R2,L1,new
+18,3,SmolVLA,3,Put the red sponge in the left tray.,L1,R1,seen
+19,4,SmolVLA,1,Put the blue sponge in the left tray.,L3,R2,seen
+20,4,SmolVLA,3,Put the red sponge in the left tray.,L1,R2,new
+21,4,SmolVLA,4,Put the red sponge in the right tray.,R3,L1,seen
+22,4,ACT x4,1,Put the blue sponge in the left tray.,L3,R2,seen
+23,4,ACT x4,3,Put the red sponge in the left tray.,L1,R2,new
+24,4,ACT x4,4,Put the red sponge in the right tray.,R3,L1,seen
+25,5,ACT x4,1,Put the blue sponge in the left tray.,R1,L1,seen
+26,5,ACT x4,3,Put the red sponge in the left tray.,L3,R3,new
+27,5,ACT x4,4,Put the red sponge in the right tray.,R1,L1,seen
+28,5,SmolVLA,1,Put the blue sponge in the left tray.,R1,L1,seen
+29,5,SmolVLA,3,Put the red sponge in the left tray.,L3,R3,new
+30,5,SmolVLA,4,Put the red sponge in the right tray.,R1,L1,seen
+31,6,SmolVLA,1,Put the blue sponge in the left tray.,R3,L3,new
+32,6,SmolVLA,1,Put the blue sponge in the left tray.,L1,R3,seen
+33,6,SmolVLA,4,Put the red sponge in the right tray.,R2,L1,new
+34,6,ACT x4,1,Put the blue sponge in the left tray.,R3,L3,new
+35,6,ACT x4,1,Put the blue sponge in the left tray.,L1,R3,seen
+36,6,ACT x4,4,Put the red sponge in the right tray.,R2,L1,new
+37,7,ACT x4,2,Put the blue sponge in the right tray.,L1,R3,seen
+38,7,ACT x4,3,Put the red sponge in the left tray.,L3,R1,seen
+39,7,ACT x4,1,Put the blue sponge in the left tray.,R3,L1,seen
+40,7,SmolVLA,2,Put the blue sponge in the right tray.,L1,R3,seen
+41,7,SmolVLA,3,Put the red sponge in the left tray.,L3,R1,seen
+42,7,SmolVLA,1,Put the blue sponge in the left tray.,R3,L1,seen
+43,8,SmolVLA,1,Put the blue sponge in the left tray.,L3,R3,new
+44,8,SmolVLA,4,Put the red sponge in the right tray.,L2,R2,seen
+45,8,SmolVLA,2,Put the blue sponge in the right tray.,L3,R2,seen
+46,8,ACT x4,1,Put the blue sponge in the left tray.,L3,R3,new
+47,8,ACT x4,4,Put the red sponge in the right tray.,L2,R2,seen
+48,8,ACT x4,2,Put the blue sponge in the right tray.,L3,R2,seen
+49,9,ACT x4,1,Put the blue sponge in the left tray.,L2,R1,new
+50,9,ACT x4,3,Put the red sponge in the left tray.,L2,R2,seen
+51,9,ACT x4,3,Put the red sponge in the left tray.,R1,L2,new
+52,9,SmolVLA,1,Put the blue sponge in the left tray.,L2,R1,new
+53,9,SmolVLA,3,Put the red sponge in the left tray.,L2,R2,seen
+54,9,SmolVLA,3,Put the red sponge in the left tray.,R1,L2,new
+55,10,SmolVLA,4,Put the red sponge in the right tray.,R3,L3,new
+56,10,SmolVLA,1,Put the blue sponge in the left tray.,L3,R1,seen
+57,10,SmolVLA,4,Put the red sponge in the right tray.,R3,L2,seen
+58,10,ACT x4,4,Put the red sponge in the right tray.,R3,L3,new
+59,10,ACT x4,1,Put the blue sponge in the left tray.,L3,R1,seen
+60,10,ACT x4,4,Put the red sponge in the right tray.,R3,L2,seen
+61,11,ACT x4,3,Put the red sponge in the left tray.,R1,L3,seen
+62,11,ACT x4,2,Put the blue sponge in the right tray.,L2,R1,new
+63,11,ACT x4,4,Put the red sponge in the right tray.,L1,R2,new
+64,11,SmolVLA,3,Put the red sponge in the left tray.,R1,L3,seen
+65,11,SmolVLA,2,Put the blue sponge in the right tray.,L2,R1,new
+66,11,SmolVLA,4,Put the red sponge in the right tray.,L1,R2,new
+67,12,SmolVLA,1,Put the blue sponge in the left tray.,R2,L2,seen
+68,12,SmolVLA,2,Put the blue sponge in the right tray.,R1,L2,new
+69,12,SmolVLA,4,Put the red sponge in the right tray.,L2,R3,seen
+70,12,ACT x4,1,Put the blue sponge in the left tray.,R2,L2,seen
+71,12,ACT x4,2,Put the blue sponge in the right tray.,R1,L2,new
+72,12,ACT x4,4,Put the red sponge in the right tray.,L2,R3,seen
