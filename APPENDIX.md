@@ -73,6 +73,7 @@ moves. The second recording has no frames after the release.
 | Size | 52 M parameters | 450 M parameters, of which 100 M trained (the action expert; vision-language backbone frozen) |
 | Training | 30,000 steps, batch 8 | 30,000 steps, batch 8 |
 | Time on the RTX 3060 | about 2.5 h | about 3 h |
+| One prediction on the RTX 3060 | about 20 ms, every step | about 325 ms per chunk of 50 steps (about 450 ms with real-time chunking) |
 | Running on the robot | temporal ensembling: a new prediction every step, averaged | real-time chunking: chunks of 50 steps, the next one computed in the background |
 
 Each model runs in its authors' real-robot setting. Without real-time chunking, SmolVLA stood still for about 5 of
@@ -225,11 +226,10 @@ data.
 
 ## Other findings
 
-- **Small hardware details matter.** The C270 webcams only gave 15 fps in dim light until I switched off one camera
-  setting (`exposure_dynamic_framerate`). A side-camera shift of 3 pixels made ACT close its gripper about 10 frames
-  later in an offline test.
+- **Small hardware details matter.** The C270 webcams only gave 15 fps in dim light until I switched off one camera setting (`exposure_dynamic_framerate`). Both cameras moved 3-4 pixels between test days. A setup control showed no clear effect: both models scored 8/9, against 9/9 in the main test.
 - **Fixing the rule before the data keeps me honest.** My bets were far off, and a 2-trial gap is a tie by my own rule.
   Writing that rule down first is what stops me from calling 18 against 16 a win.
+- **SmolVLA moved more shakily than ACT.** Measured offline as how much the commanded step changes from tick to tick, with my demos as 1×: SmolVLA’s commands were about 14× rougher. ACT’s raw predictions were about 6×, but temporal ensembling averages that away (0.3×, smoother than my demos); LeRobot has no such averaging for SmolVLA. A smaller part: real-time chunking ties the first 10 steps of a new chunk to the old one (the default setting), but my GPU needs 14 steps to compute a chunk. By then those 10 steps are already in the past, so the arm jumps at each switch. Offline, a setting of 20 (`execution_horizon`) removed the jump; I haven’t tried it on the robot.
 
 ## Limitations
 
@@ -243,9 +243,8 @@ data.
   effect on the 53-demo models; the two models within each test were always interleaved.
 - **Compute:** with temporal ensembling, ACT's control loop ran at 9–30 Hz on the 4-core CPU, below the 30 Hz of the
   demos. The GPU driver was updated between the main test and the 18-demo test; the measured inference times didn't
-  change.
-- **Training budget:** the 18-demo models used the same 30,000 steps as the 53-demo models, so they saw each demo about
-  3× as often. I did not tune anything for the smaller set.
+  change. The 12 GB GPU also limits which models I can fine-tune; I didn’t try larger VLAs.
+- **Training budget:** both models got the same training budget, 30,000 steps at batch size 8. This was fixed before training so that each run fits in one evening on this GPU (LeRobot’s default is 100,000 steps). That is 30,000 × 8 = 240,000 frames shown. The 53 demos hold 40,781 frames, so each model saw every frame about 240,000 / 40,781 ≈ 6 times. I only tested the final checkpoint and didn’t tune the number of steps. The 18-demo models used the same 30,000 steps, so they saw each demo about 3× as often; I did not tune anything for the smaller set.
 - **Rules added after a test:** the rule for which code to use when one problem leads to another, and the grasp-quality
   scale, were written after the main test but before watching its video. The codes for "never closes" (G) and "frozen
   on the way" (F) were added after the tests where they first appeared, before reviewing them. The yellow-sentence

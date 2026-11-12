@@ -17,18 +17,18 @@ https://github.com/user-attachments/assets/325f4311-dcac-4d5f-81f6-62c1d3695266
 | Yellow sponge instead of blue | 0/4 | 0/4 |
 | 52 rushed demos (my first recording) | 0/18 | 7/18 |
 
-Each model got the same 18 placements of the sponge (9 dots in a 3×3 grid, each straight and turned 45°). In the main test and the 18-demo test the two models were
-interleaved, and by the rule I fixed before testing neither shows a significant difference between ACT and SmolVLA.
+Each model got the same 18 placements of the sponge (9 dots in a 3×3 grid, each straight and turned 45°). In the main test and the 18-demo test the two models were interleaved. 
 
 ## What I found
 
-1. **How I recorded the demos mattered more than the model.** My first recording was rushed: I sped up across the demos, grasped quickly, barely opened the gripper over the tray, and drove the arm back home in the same recording. 
+1. **On this task the two models are tied.** 16/18 against 18/18 is no significant difference and neither is 13/18 against 11/18 with 18 demos. In the main test both models are at the ceiling, most likely because the task is fairly simple: a pick-and-place task with one object, one sentence, and every test trial was in the demos (in-distribution). This task doesn’t test the language and generalisation SmolVLA is built for.
+2. **How I recorded the demos mattered more than the model.** My first recording was rushed: I sped up across the demos, grasped quickly, barely opened the gripper over the tray, and drove the arm back home in the same recording. 
 I recorded everything again, slower and more carefully, ending each demo at the release. SmolVLA went from 7/18 to 18/18 and ACT from 0/18 to 16/18 (the light also changed between the two recordings). 
 On the rushed demos ACT held the sponge in 11 of 18 trials and then froze in mid-air, most likely because the way home in those demos passes the same arm positions as the way to the tray, in the opposite direction.
-2. **Fewer demos hurt the grasp first.** Training on a smaller dataset (18 instead of 53 demos), SmolVLA failed to grasp the sponge in 7 trials instead of 0. Both models sometimes stood above the sponge without closing the gripper.
-3. **The models learned this blue sponge, not "a sponge".** 
+3. **Fewer demos hurt the grasp first.** Training on a smaller dataset (18 instead of 53 demos), SmolVLA failed to grasp the sponge in 7 trials instead of 0. Both models sometimes stood above the sponge without closing the gripper.
+4. **The models learned this blue sponge, not "a sponge".** 
 Both models failed all 8 trials with a yellow sponge, on placements where the blue one worked 8 of 8. Writing “yellow” in SmolVLA’s task sentence didn’t help (0/4).
-4. **A high success rate hid sloppy grasps.** Only 13 of 18 grasps were clean for each model in the main test. The soft sponge allowed the gripper to grab it just at the corner or from top in the middle of the sponge.
+5. **A high success rate hid sloppy grasps.** Only 13 of 18 grasps were clean for each model in the main test. The soft sponge allowed the gripper to grab it just at the corner or from top in the middle of the sponge.
 
 The details, every table and the full list of limitations are in [APPENDIX.md](APPENDIX.md).
 
@@ -37,7 +37,7 @@ The details, every table and the full list of limitations are in [APPENDIX.md](A
 - SO-101 follower arm, teleoperated with an SO-101 leader arm.
 - Two Logitech C270 webcams (top and side), no wrist camera.
 - 9 marked dots 5 cm apart in a 3x3 grid; the sponge starts on a dot, aligned or turned 45°. Lamp light and curtains closed for a reproducible environment.
-- ACT trained from scratch, run with temporal ensembling; SmolVLA fine-tuned from `lerobot/smolvla_base`, run with real-time chunking (RTC). Both 30,000 steps on one RTX 3060 (12 GB), with [LeRobot](https://github.com/huggingface/lerobot) 0.6.0.
+- ACT (52 M parameters) trained from scratch, run with temporal ensembling; SmolVLA (450 M parameters) fine-tuned from `lerobot/smolvla_base`: the 350 M vision-language backbone stayed frozen, the 100 M action expert was trained, run with real-time chunking (RTC). Both 30,000 steps on one RTX 3060 (12 GB), with [LeRobot](https://github.com/huggingface/lerobot) 0.6.0.
 
 ![What the robot sees: top and side camera, at the start and at the grasp](media/camera_views.jpg)
 
