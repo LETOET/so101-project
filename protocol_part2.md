@@ -61,3 +61,14 @@ Main test: SmolVLA 30 of 36, ACT x4 9 of 36.
 Reworded sentences: SmolVLA 8 of 16.
 Fewer demos: SmolVLA on 24 demos 6 of 24, on 48 demos 12 of 24.
 Why: I think SmolVLA is able to generalize pretty well. Occasional failed grasps and choosing the wrong sponge can happen. ACT cannot understand language and doesn't know which sponge to pick up and doesn't know which tray to put it in. Therefore i expect that there is a 25% chance that ACT will take the right sponge and the right tray. With reworded sentence i expect that the SmolVLA will still be able to perform, but will make more mistakes as it has new language inputs and then needs to know how to react to that. In the first part of this experiment the performance of SmolVLA dropped when trained on fewer data, similarly I expect the SmolVLA models to perform worse when trained on fewer demo data.
+
+## Additions on 13 November 2026, after recording and before training
+- Dataset: jaaaa000/so101_part2. I recorded 111 demos on 13 November; 96 are used.
+- Round 1 was recorded again at the end of the session, and the first round 1 is not used.
+  Its pace differed from the other rounds: I let go of the sponge after 23 s on average,
+  against 17 to 19 s in rounds 2 to 8.
+- Three single demos were recorded again and their first versions are left out of training:
+  round 2 demo 1 and round 3 demo 2 (the sponges were on swapped sides), and round 2 demo 4
+  (the arm stood still for about 10 s).
+- N = 46,000 steps for every model: the 96 demos hold 61,358 frames, 6 passes at batch size 8.
+- Before the real recording I made 8 practice demos on 12 November. They are not used for training.
