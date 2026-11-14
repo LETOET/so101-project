@@ -268,7 +268,9 @@ On the robot, SmolVLA moved more shakily than ACT. I observed this visually, so 
 | ACT with temporal ensembling (as tested) | 0.017 | 0.3× |
 | SmolVLA with real-time chunking (as tested) | 0.887 | 14× |
 
-Temporal ensembling averages ACT's roughness away. LeRobot has no such averaging for SmolVLA.
+Temporal ensembling averages ACT's roughness away. LeRobot has no such averaging for SmolVLA. See figure below: SmolVLA’s step size jumps up and down from tick to tick, while ACT with temporal ensembling is steadier because it averages its predictions.
+
+<img src="media/smolvla_motion.png" alt="Commands for the shoulder lift joint over 100 ticks: my demo, ACT and SmolVLA" width="600">
 
 **The joins between chunks.** SmolVLA needs about 14 ticks to compute a chunk of 50 actions. The arm keeps
 following the old chunk meanwhile, so the first 14 actions of the new chunk are too late. Real-time chunking
