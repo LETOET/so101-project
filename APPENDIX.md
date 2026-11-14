@@ -14,10 +14,7 @@ Details behind the [README](README.md): setup, data, models, every result table,
 
 ## Why this experiment
 
-Every robot-learning task in industry starts with the same questions: how many demonstrations does it need, and which
-model? Large pretrained models promise to need fewer demos, because they bring prior knowledge. SmolVLA was
-pretrained on community data from SO-100 arms, which are nearly the same body as the SO-101. If its pretraining pays
-off anywhere, it should be here.
+Every robot-learning task in industry starts with the same questions: how many demonstrations does it need, and which model? Large pretrained models promise to need fewer demos, because they bring prior knowledge. SmolVLA was pretrained on community data from SO-100 arms, which are nearly the same body as the SO-101. In this project I am trying to find out if its pretraining pays off.
 
 In an earlier simulation exercise on a different arm (ALOHA), SmolVLA's robot pretraining made no difference after
 5,000 fine-tuning steps (20/50 against 19/50 with a randomly initialised action expert). This project tests the
@@ -135,28 +132,52 @@ dot once aligned and once at 45°), with the same settings, and ran the same 36 
 
 ### Is the difference significant?
 
-I checked it two ways, and they agree: no.
+I checked it two ways and both say there is no significant difference.
 
-| Test | ACT | SmolVLA | Gap | Gap my rule needs | Fisher's exact test |
+#### Margin rule
+
+| Test | ACT | SmolVLA | Gap | Gap my rule needs |
+|---|---|---|---|---|
+| Main test, 53 demos | 16/18 | 18/18 | 2 | 2.7 |
+| 18 demos | 13/18 | 11/18 | 2 | 5.6 |
+
+#### Paired placement comparison
+
+| Test | Both succeed | Only ACT | Only SmolVLA | Both fail | Exact McNemar test |
 |---|---|---|---|---|---|
-| Main test, 53 demos | 16/18 | 18/18 | 2 | 2.7 | p = 0.49 |
-| 18 demos | 13/18 | 11/18 | 2 | 5.6 | p = 0.72 |
+| Main test, 53 demos | 16 | 0 | 2 | 0 | p = 0.50 |
+| 18 demos | 9 | 4 | 2 | 3 | p = 0.69 |
 
-**My margin rule** (fixed before testing): a model's margin is $m = \sqrt{n\,p\,(1-p)}$ trials, with $n$ trials and
-success rate $p$. I only believe a gap between the models if it is at least $2\sqrt{m_\text{ACT}^2 + m_\text{SmolVLA}^2}$.
+<details>
+<summary><b>Show statistical details & formulas</b></summary>
+<br>
 
-**Fisher's exact test** asks: if both models were equally good, how likely is a split at least this uneven? With
-$n = 18$ trials per model, $x$ successes for ACT and $s$ successes in total, the chance of one particular split is
+**My margin rule** (fixed before testing). A model's margin is $m = \sqrt{n\,p\,(1-p)}$ trials, where $n$ is the number of trials and $p$ is the success rate. A gap between models is only treated as meaningful if it is at least: $2\sqrt{m_\text{ACT}^2 + m_\text{SmolVLA}^2}$.
 
-$$P(x) = \frac{\binom{n}{x}\binom{n}{s-x}}{\binom{2n}{s}}$$
+**The exact McNemar test** (added 13 November 2026, after the tests). Both models got the same 18 placements, so I compare them placement by placement. Only the placements where exactly one model succeeded and the other failed count: $b$ for ACT and $c$ for SmolVLA. If the models were equally good,  each disagreement behaves like a fair coin flip. The p-value is the probability that $b + c$ fair coin flips split at least this unevenly ($p = 1$ if the formula gives more than 1):
 
-The p-value adds up $P$ over every split that is as unlikely as the one I saw, or more. A difference counts as
-significant when $p < 0.05$. Here $p$ is 0.49 and 0.72: a gap of 2 out of 18 easily happens by chance.
+$$p = 2 \sum_{i=0}^{\min(b,c)} \binom{b+c}{i} \left(\tfrac{1}{2}\right)^{b+c}$$
 
-The two tests on the rushed recording (ACT 0/18, SmolVLA 7/18) ran on different days, so I don't test that pair.
+* **Main test, 53 demos ($b = 0, c = 2$):** 
+  $$p = 2 \binom{2}{0} \left(\frac{1}{2}\right)^2 = 2 \cdot \frac{1}{4} = 0.50$$
+* **18 demos ($b = 4, c = 2$):** 
+  $$p = 2 \left[ \binom{6}{0} + \binom{6}{1} + \binom{6}{2} \right] \left(\frac{1}{2}\right)^6 = 2 \cdot \frac{1 + 6 + 15}{64} = 0.69$$
 
-Codes and grasp quality for this test come from my notes during the trials
-([demos18_video_review.csv](results/demos18_video_review.csv)).
+A difference counts as significant when $p < 0.05$. An earlier version used Fisher's exact test (0.49 and 0.72), which ignores that the trials are paired. The test ([McNemar, 1947](https://doi.org/10.1007/BF02295996)) is used for comparing two models that were each trained once and tested on the same cases. 
+
+Codes and grasp quality for the 18-demo test come from my notes during the trials ([demos18_video_review.csv](results/demos18_video_review.csv)).
+</details>
+
+
+#### What this means
+
+- **No significant difference.** Neither check separates ACT and SmolVLA.
+- **That does not prove they are equally good.** With 18 placements this experiment can only see a large difference: the smallest split the paired test calls significant is 6 placements to 0.
+- **The main test left little room for a gap.** Both models were close to 100 %.
+- **What would show a smaller difference:** more trials, or a task where the models can differ more. Part 2 of this project does the second: two sponges, two trays and four sentences, with 36 trials per system, 12 of them on placements kept out of the demos.
+
+
+
 
 ### Setup control
 
@@ -189,7 +210,9 @@ trials the 18-demo models scored 6/9 each. So the setup change alone doesn't exp
   interleaved, so I don't compare the two models there. Before this, ACT on the rushed recording only had 12
   uncounted pilot tries (3 of 12).
 
-### All counted outcomes
+<details>
+<summary><b>All counted outcomes</b></summary>
+<br>
 
 | Test | Model | S | A | G | D | M | T | F |
 |---|---|---|---|---|---|---|---|---|
@@ -206,6 +229,7 @@ trials the 18-demo models scored 6/9 each. So the setup change alone doesn't exp
 The main test, the 18-demo test and ACT on the rushed recording use the codes after the coding rule
 ([video_review.csv](results/video_review.csv), [demos18_video_review.csv](results/demos18_video_review.csv),
 [act_v1_video_review.csv](results/act_v1_video_review.csv)); the other rows are the codes as typed during the test.
+</details>
 
 ### My bets against the results
 
@@ -230,6 +254,40 @@ data.
 - **Fixing the rule before the data keeps me honest.** My bets were far off, and a 2-trial gap is a tie by my own rule.
   Writing that rule down first is what stops me from calling 18 against 16 a win.
 - **SmolVLA moved more shakily than ACT.** Measured offline as how much the commanded step changes from tick to tick, with my demos as 1×: SmolVLA’s commands were about 14× rougher. ACT’s raw predictions were about 6×, but temporal ensembling averages that away (0.3×, smoother than my demos); LeRobot has no such averaging for SmolVLA. A smaller part: real-time chunking ties the first 10 steps of a new chunk to the old one (the default setting), but my GPU needs 14 steps to compute a chunk. By then those 10 steps are already in the past, so the arm jumps at each switch. Offline, a setting of 20 (`execution_horizon`) removed the jump; I haven’t tried it on the robot.
+
+## SmolVLA's motion
+
+On the robot, SmolVLA moved more shakily than ACT. I observed this visually, so I checked it offline.
+
+**Method.** From the careful recording I took 6 demos (episodes 2, 15, 24, 30, 38 and 50). Each model got the recorded camera frames of 200 ticks per demo, and the commands were analyzed. A smooth arm moves in steps of about the same size; a shaky arm keeps changing its step size. This change in step size (here called roughness) is the mean absolute second difference of the commands, |a(t+1) − 2·a(t) + a(t−1)|, averaged over the 6 joints, the ticks and the 6 demos.
+
+| Commands | Roughness | Against my demos |
+|---|---|---|
+| My demos | 0.062 | 1× |
+| ACT, raw predictions | 0.369 | 6× |
+| ACT with temporal ensembling (as tested) | 0.017 | 0.3× |
+| SmolVLA with real-time chunking (as tested) | 0.887 | 14× |
+
+Temporal ensembling averages ACT's roughness away. LeRobot has no such averaging for SmolVLA.
+
+**The joins between chunks.** SmolVLA needs about 14 ticks to compute a chunk of 50 actions. The arm keeps
+following the old chunk meanwhile, so the first 14 actions of the new chunk are too late. Real-time chunking
+ties the first 10 actions of the new chunk to the old one (the default `execution_horizon`):
+
+```
+action of the new chunk:   1 .............. 10 | 11 .... 14 | 15 ............ 50
+tied to the old chunk:     yes                 | no         | no
+when the chunk is ready:   actions are too late and dropped | executed (jump at action 15)
+```
+
+The arm takes over at action 15, which is not tied, so it jumps: offline 1.62 per joint at a join, against 0.5–0.6 for a normal step. With a setting of 20 the jump was 0.50. This is the smaller part: the roughness then goes from 14× to 12×.
+
+**What this rests on.**
+- Seen on the robot: SmolVLA shook more than ACT. By eye, not measured.
+- Measured offline: the roughness and the jumps. The models' commands were not fed back to an arm, and
+  commands are not the arm's real motion.
+- Read from LeRobot's code (0.6.0): how the tie and the delay work together.
+- Not tested on the robot: a longer `execution_horizon`.
 
 ## Limitations
 

@@ -31,10 +31,10 @@ for trial in trials:
     print("Trial", trial["trial"], "of", len(trials), ": dot ", trial["dot"], trial["angle"], "model", trial["model"])
 
     # 4. Keep asking until the answer is one of the outcome codes from protocol.md.
-    allowed = ["S", "A", "G", "D", "M", "T"]
+    allowed = ["S", "A", "G", "D", "M", "T", "F"]
 
     while True:
-        code = input("Code (S/A/G/D/M/T): ").strip().upper()
+        code = input("Code (S/A/G/D/M/F/T): ").strip().upper()
         if code in allowed:
             break
         print("Not valid, try again.")

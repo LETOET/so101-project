@@ -1,3 +1,5 @@
+_Work in progress..._
+
 # ACT vs SmolVLA on a real SO-101
 
 In this experiment I compare a specialist model (ACT, trained from scratch) against a robot-pretrained
@@ -21,7 +23,7 @@ Each model got the same 18 placements of the sponge (9 dots in a 3×3 grid, each
 
 ## What I found
 
-1. **On this task the two models are tied.** 16/18 against 18/18 is no significant difference and neither is 13/18 against 11/18 with 18 demos. In the main test both models are at the ceiling, most likely because the task is fairly simple: a pick-and-place task with one object, one sentence, and every test trial was in the demos (in-distribution). This task doesn’t test the language and generalisation SmolVLA is built for.
+1. **On this task I found no difference between the models.** 16/18 against 18/18 is no significant difference and neither is 13/18 against 11/18 with 18 demos. In the main test both models are at the ceiling, most likely because the task is fairly simple: a pick-and-place task with one object, one sentence, and every test placement was in the demos (in-distribution). This task doesn’t test the language and generalisation the bigger pretrained SmolVLA is built for.
 2. **How I recorded the demos mattered more than the model.** My first recording was rushed: I sped up across the demos, grasped quickly, barely opened the gripper over the tray, and drove the arm back home in the same recording. 
 I recorded everything again, slower and more carefully, ending each demo at the release. SmolVLA went from 7/18 to 18/18 and ACT from 0/18 to 16/18 (the light also changed between the two recordings). 
 On the rushed demos ACT held the sponge in 11 of 18 trials and then froze in mid-air, most likely because the way home in those demos passes the same arm positions as the way to the tray, in the opposite direction.
@@ -73,3 +75,28 @@ Every command I ran is in [commands.md](commands.md). The raw results are in [re
 
 
 <img src="media/setup.jpg" alt="The setup: SO-101 arm, top and side webcam, tray" width="420">
+
+
+
+#### _Future work:_
+
+## Part 2: does the arm do what the sentence says?
+
+Two sponges and two trays are always on the table. Only the sentence says which sponge goes in which tray,
+for example *"Put the red sponge in the left tray."* There are four sentences.
+
+One SmolVLA model reads the sentence. Against it: four ACT models, one per sentence, picked by the sentence.
+Both systems were trained on the same 96 demos, with the same number of steps per model.
+
+| Test | SmolVLA | 4 × ACT |
+|---|---|---|
+| Named sponge in the named tray | ?/36 | ?/36 |
+| – went for the named sponge | ?/36 | ?/36 |
+| – went to the named tray | ?/36 | ?/36 |
+| – placements from the demos / new placements | ?/24, ?/12 | ?/24, ?/12 |
+| Reworded sentences | ?/16 | can't run |
+| Trained on 24 / 48 / 96 demos (of 24 trials) | ? / ? / ? | |
+
+A system that ignored the sentence has a 25 % chance of getting it right and would get about 9 of 36.
+
+The protocol and my bets were committed before recording: [protocol_part2.md](protocol_part2.md).
