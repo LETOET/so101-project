@@ -1,6 +1,4 @@
-_Work in progress..._
-
-# ACT vs SmolVLA on a real SO-101
+# ACT vs SmolVLA on a LeRobot SO-101 arm
 
 In this experiment I compare a specialist model (ACT, trained from scratch) against a robot-pretrained
 vision-language-action model (SmolVLA, fine-tuned from `lerobot/smolvla_base`) on a pick-and-place task. I do this on
@@ -77,8 +75,7 @@ Every command I ran is in [commands.md](commands.md). The raw results are in [re
 <img src="media/setup.jpg" alt="The setup: SO-101 arm, top and side webcam, tray" width="420">
 
 
-
-#### _Future work:_
+_Part 2 is still work in progress..._
 
 ## Part 2: does the arm do what the sentence says?
 
@@ -100,3 +97,6 @@ Both systems were trained on the same 96 demos, with the same number of steps pe
 A system that ignored the sentence has a 25 % chance of getting it right and would get about 9 of 36.
 
 The protocol and my bets were committed before recording: [protocol_part2.md](protocol_part2.md).
+
+
+<img src="media/setup_part2.jpeg" alt="The setup of part 2: SO-101 arm, top and side webcam, tray" width="420">
