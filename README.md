@@ -6,7 +6,7 @@ a low-cost SO-101 arm and train on my own machine.
 
 Task: *"Pick up the blue sponge and put it in the white tray."*
 
-https://github.com/user-attachments/assets/325f4311-dcac-4d5f-81f6-62c1d3695266
+https://github.com/user-attachments/assets/876e67f6-8099-4559-8161-4afa589ed562
 
 ## Results
 
