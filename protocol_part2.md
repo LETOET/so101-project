@@ -72,3 +72,27 @@ Why: I think SmolVLA is able to generalize pretty well. Occasional failed grasps
   (the arm stood still for about 10 s).
 - N = 46,000 steps for every model: the 96 demos hold 61,358 frames, 6 passes at batch size 8.
 - Before the real recording I made 8 practice demos on 12 November. They are not used for training.
+
+## Additions on 15 November 2026, after training and the pilot tries, before the first trial
+- Models, each the last checkpoint after 46,000 steps: outputs/smolvla_part2 (96 demos),
+  outputs/act_part2_s1 to act_part2_s4 (the number is the sentence number, 24 demos each),
+  outputs/smolvla_part2_48 and outputs/smolvla_part2_24 (the in_48 and in_24 columns of
+  results/part2_demo_order.csv).
+- The 48-demo and 24-demo models were trained on 14 November, before the main test.
+- All trials run on LeRobot 0.6.0.
+- ACT runs with n_action_steps=1 and temporal_ensemble_coeff=0.01, the same as in part 1.
+- SmolVLA runs with real-time chunking and execution_horizon=15. Part 1 ran the default, 10.
+  Reason: a plan takes about 14 ticks to compute on my PC, so a shorter horizon does nothing.
+  The first plan of a run takes about 35 ticks (measured in part 1), so 15 of its 50 moves are left,
+  and LeRobot 0.6.0 fills a longer horizon with zeros. Offline that gave a jump of about 29 degrees
+  from horizon 16 up.
+- Pilot tries on 14 November, not counted. ACT: one try per model, all four did the task.
+  SmolVLA: horizon 10, 14, 15, 16, 17, 18, 19 and 20. All finished within 30 s, all were shaky,
+  with a bigger overshoot at the start from 18 up.
+- The side camera's picture sits 2.3 px higher than during the recording (measured 14 November).
+  I leave it there. Offline, ACT then plans its gripper close 2 to 4 frames later. SmolVLA changes
+  less than between two of its own noise draws.
+- After writing my bets I saw offline checks on recorded pictures: the sentence check on the three
+  SmolVLA models, the camera shift and the RTC start. No robot, nothing counted. My bets are unchanged.
+- Extra question, no bet: which word is harder, the colour or the side? Read from the sponge and
+  tray columns of the main test.
