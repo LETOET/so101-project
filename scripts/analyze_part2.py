@@ -8,15 +8,16 @@ import csv
 with open(sys.argv[1], newline="") as f:
     results = list(csv.DictReader(f))
 
-# 2. Count trials and successes per system, and successes per system and sentence.
+# 2. Count trials and successes per system, and per system and sentence.
 counts_trials = {}
 counts_successes = {}
-counts_per_system = {}
+trials_per_sentence = {}
 counts_per_sentence = {}
 for row in results:
     system = row["system"]  # the system name in this row, for example "SmolVLA"
     sentence_nr = row["system"] + " sentence: " + row["sentence_nr"]
     counts_trials[system] = counts_trials.get(system, 0) + 1  # one more trial for this system (starts from 0)
+    trials_per_sentence[sentence_nr] = trials_per_sentence.get(sentence_nr, 0) + 1
     if row["code"] == "S" and row["sponge"] == "Y" and row["tray"] == "Y": # a success: code S, the named sponge (Y) and the named tray (Y)
         counts_successes[system] = counts_successes.get(system, 0) + 1
         counts_per_sentence[sentence_nr] = counts_per_sentence.get(sentence_nr, 0) + 1
@@ -27,6 +28,8 @@ for system in counts_trials:
     successes = counts_successes.get(system, 0)
     print(system, "trials:", n, "successes:", successes)
 
-# 4. Print successes per system and sentence (a sentence without any success is not listed yet).
-for sentence in counts_per_sentence:
-    print(sentence, "successes:", counts_per_sentence[sentence])
+# 4. Print trials and successes per system and sentence.
+for sentence in trials_per_sentence:
+    n = trials_per_sentence[sentence]
+    successes = counts_per_sentence.get(sentence, 0)
+    print(sentence, "trials:", n, "successes:", successes)
