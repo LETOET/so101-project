@@ -47,6 +47,10 @@ The details, every table and the full list of limitations are in [APPENDIX.md](A
 - 9 dots × 2 angles = 18 trials per model, in a seeded order, in blocks of 3 alternating between the models.
 - One attempt per trial, 30 seconds. Success means the whole sponge in the tray and released.
 - I only believe a gap between the models if it is at least twice its margin, about 6 of 18 here.
+- Every command I ran is in [commands.md](commands.md). The raw results are in [results/](results/), and
+[scripts/analyze.py](scripts/analyze.py) computes the success rates, margins and verdict from them.
+
+<!-- HUB: add links to the datasets and models once they are uploaded. -->
 
 ## Limitations
 
@@ -58,12 +62,7 @@ The details, every table and the full list of limitations are in [APPENDIX.md](A
 
 More in [APPENDIX.md](APPENDIX.md#limitations).
 
-## Reproduce
-
-Every command I ran is in [commands.md](commands.md). The raw results are in [results/](results/), and
-[scripts/analyze.py](scripts/analyze.py) computes the success rates, margins and verdict from them.
-
-<!-- HUB: add links to the datasets and models once they are uploaded. -->
+<!-- ## Reproduce -->
 
 ## Next
 
@@ -91,8 +90,8 @@ Both systems were trained on the same 96 demos, with the same number of steps pe
 | – went for the named sponge | 36/36 | 36/36 |
 | – went to the named tray | 34/36 | 36/36 |
 | – placements from the demos / new placements | 23/24, 11/12 | 24/24, 12/12 |
-| Reworded sentences | 10/16 | can't run |
-| Trained on 24 / 48 / 96 demos (of 24 trials) | 14/24 , 23/24, 23/24 | |
+| Reworded sentences | 11/16 | --- |
+| Trained on 24 / 48 / 96 demos (of 24 trials) | 14/24, 23/24, 23/24 | ---|
 
 A system that ignored the sentence has a 25 % chance of getting it right and would get about 9 of 36.
 
