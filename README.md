@@ -92,7 +92,7 @@ Both systems were trained on the same 96 demos, with the same number of steps pe
 | – went to the named tray | 34/36 | 36/36 |
 | – placements from the demos / new placements | 23/24, 11/12 | 24/24, 12/12 |
 | Reworded sentences | 10/16 | can't run |
-| Trained on 24 / 48 / 96 demos (of 24 trials) | ... / ... / ... | |
+| Trained on 24 / 48 / 96 demos (of 24 trials) | 14/24 , 23/24, 23/24 | |
 
 A system that ignored the sentence has a 25 % chance of getting it right and would get about 9 of 36.
 
