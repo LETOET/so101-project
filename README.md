@@ -60,7 +60,7 @@ A system that ignored the sentence would have a 25% chance and get about 9 of 36
 ### Limitations and how to test them
 
 - **Picking accuracy.** 15 of the 18 failed trials in part 2 were grasp failures. A wrist camera could increase the picking accuracy.
-- **Language understanding.** One of the four reworded sentences scored 1/4. Testing it against its original wording, and on a bigger pretrained model (like GR00T N2 or π0.5), would show whether the wording or the model is the cause.
+- **Language understanding.** One of the four reworded sentences scored 1/4. Testing it against its original wording, and on a bigger pretrained model (like OpenVLA or π0.5), would show whether the wording or the model is the cause.
 - **Generalisation.** With 24 demos, SmolVLA scored 3/12 on placements outside its demos (out-of-distribution: new pairs of dots it had seen). Sponges on dots that are in no demo at all would test this further.
 - **Task difficulty.** Both systems scored very high, so the main test cannot show which one is better. A more complex task could.
 

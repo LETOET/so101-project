@@ -226,8 +226,8 @@ their own.
 | Fewer demos | 33 | Y / N / A | Y / Y / A | it went on to the named tray without the sponge |
 | Fewer demos | 47 | N / N / A | N / Y / A | the same |
 
-- Reworded: commits `8e5e44d` (as typed), `970b36f` (from my notes), `0fde946` (trial 7, from the video) and one
-  more on 17 November 2026 (trial 15, from the video). By the success rule the typed file gives 10/16; it is 11/16 now.
+- Reworded: commits `8e5e44d` (as typed), `970b36f` (from my notes), `0fde946` (trial 7, from the video) and
+  `45ad852` (trial 15, from the video). By the success rule the typed file gives 10/16; it is 11/16 now.
 - Fewer demos: commits `220b364` (as typed) and `175c9bf` (from my notes). The 24-demo model has 15/24 in the typed
   file and 14/24 now.
 
