@@ -28,6 +28,8 @@ What is new:
 | Placements | 18 (9 dot pairs, both colour orders). 12 are in the demos, 6 are kept out: dot pairs L1-R2, L2-R1 and L3-R3 |
 | Software | LeRobot 0.6.0, as in part 1 |
 
+![What the robot sees in part 2: top and side camera, at the start and at the grasp](media/camera_views_part2.jpg)
+
 ## Demonstrations
 
 | | |
@@ -120,10 +122,12 @@ The reworded sentences follow one pattern: *"Place the blue sponge into the tray
 | 4. red sponge, right tray | 8/9 | 3/4 |
 | All | 34/36 | 11/16 |
 
-- 11/16 is above the 9 that rules out luck. It went for the named sponge in 13/16 trials and to the named tray in
+- 11/16 is above the 9 that rules out luck. It went for the named sponge in 14/16 trials and to the named tray in
   14/16.
-- The five failures: three times the wrong sponge, all on reworded sentence 3 (trials 5, 6 and 15: it went for the
-  blue sponge), one missed grasp (trial 3) and one gripper that stood above the sponge and never closed (trial 14).
+- The five failures: twice the wrong sponge, both on reworded sentence 3 (trials 5 and 6: it went for the blue
+  sponge), one missed grasp (trial 3), one gripper that stood above the sponge and never closed (trial 14), and one
+  failed grasp of the named sponge, also on sentence 3 (trial 15: after it the arm took the blue sponge to the left
+  tray).
 - Lower than with the trained wording, but not certain: the gap is right at the line of my margin rule, and I had
   set no rule for this comparison before the test. I report it as an observation.
 - Whether reworded sentence 3 is harder than the others I can't say with 4 trials per sentence.
@@ -163,17 +167,17 @@ placements (dot pairs L1-R1, L2-R3 and L3-R2). The same 24 trials, split along t
 |---|---|---|---|---|---|---|
 | Main | 4 × ACT | 36 | | | | |
 | Main | SmolVLA | 34 | 2 | | | |
-| Reworded | SmolVLA | 11 | 1 | 1 | 3 | |
+| Reworded | SmolVLA | 11 | 1 | 2 | 2 | |
 | Fewer demos | SmolVLA, 24 demos | 14 | 7 | 2 | 1 | |
 | Fewer demos | SmolVLA, 48 demos | 23 | 1 | | | |
 | Fewer demos | SmolVLA, 96 demos (12 repeats) | 12 | | | | |
 
-148 counted trials, 18 failures: 14 at the grasp (11 × A, 3 × G) and 4 times the wrong sponge. The codes D, M, T
+148 counted trials, 18 failures: 15 at the grasp (11 × A, 4 × G) and 3 times the wrong sponge. The codes D, M, T
 and F did not occur.
 
 **Which word is harder, the colour or the side?** (the extra question in my protocol) In the main test neither:
-there was no word mistake at all. Over all 148 trials the arm went for the wrong sponge 4 times and never to the
-wrong tray. Three of the four were on one reworded sentence, so this is too little to say more.
+there was no word mistake at all. Over all 148 trials the arm went for the wrong sponge 3 times and never to the
+wrong tray. Two of the three were on one reworded sentence, so this is too little to say more.
 
 ### Is the difference significant?
 
@@ -216,20 +220,21 @@ their own.
 |---|---|---|---|---|
 | Reworded | 5 | O / Y / X | O / Y / W | it went for the other sponge first, so the code is W |
 | Reworded | 6 | O / Y / X | O / Y / W | the same |
-| Reworded | 15 | O / Y / S | O / Y / W | the other sponge ended in the named tray: not a success |
+| Reworded | 15 | O / Y / S | Y / Y / G | first changed to O / Y / W from my note; the video shows it went for the named sponge first and the grasp failed, then it took the other sponge to the named tray |
 | Reworded | 7 | Y / N / S | Y / Y / S | first changed to Y / O / X from my note; the video shows the red sponge in the left tray, the named one |
 | Fewer demos | 28 | Y / Y / S | Y / Y / A | it went to the tray without the sponge |
 | Fewer demos | 33 | Y / N / A | Y / Y / A | it went on to the named tray without the sponge |
 | Fewer demos | 47 | N / N / A | N / Y / A | the same |
 
-- Reworded: commits `8e5e44d` (as typed), `970b36f` (from my notes) and `0fde946` (trial 7, from the video). By the
-  success rule the typed file gives 10/16; it is 11/16 now.
+- Reworded: commits `8e5e44d` (as typed), `970b36f` (from my notes), `0fde946` (trial 7, from the video) and one
+  more on 17 November 2026 (trial 15, from the video). By the success rule the typed file gives 10/16; it is 11/16 now.
 - Fewer demos: commits `220b364` (as typed) and `175c9bf` (from my notes). The 24-demo model has 15/24 in the typed
   file and 14/24 now.
 
 **Check against the video.** Every trial was filmed with a phone. After the tests the end of each of the 148
-trials was checked against the film: 147 rows agreed, and reworded trial 7 did not (corrected above). Unlike in
-part 1, I did not score grasp quality from the video.
+trials was checked against the film: 147 rows agreed, and reworded trial 7 did not (corrected above). Reworded
+trial 15 was corrected later: its end agreed with the row, but in the clip for the project video I saw that the arm
+first went for the named sponge and the grasp failed. Unlike in part 1, I did not score grasp quality from the video.
 
 **Runs that have no row.** The film and the model starts on the PC show three runs more than there are rows.
 

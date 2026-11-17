@@ -2,8 +2,8 @@
 
 I compare a specialist model (ACT, trained from scratch) against a robot-pretrained vision-language-action model (SmolVLA, fine-tuned from `lerobot/smolvla_base`) on pick-and-place tasks, on a low-cost SO-101 arm, trained on my own machine.
 
-- **[Part 1](#part-1-one-sponge-one-sentence): Experiment with one sponge and one sentence.** Analysing model choice, data quality and data efficiency. Both models scored about equally well on this task (ACT 16/18, SmolVLA 18/18). How I recorded the demos mattered more than the model.
-- **[Part 2](#part-2-does-the-arm-do-what-the-sentence-says): Experiment with two sponges, two trays and four sentences.** Analysing language conditioning and data efficiency. One SmolVLA model that reads the sentence did as well as four specialised ACT models (34/36 against 36/36).
+- **[Part 1](#part-1-one-sponge-one-sentence): Experiment with one sponge and one sentence.** Analysing model choice, data quality and data efficiency. 
+- **[Part 2](#part-2-does-the-arm-do-what-the-sentence-says): Experiment with two sponges, two trays and four sentences.** Analysing language conditioning and data efficiency.
 
 https://github.com/user-attachments/assets/876e67f6-8099-4559-8161-4afa589ed562
 
@@ -49,19 +49,19 @@ Two sponges and two trays are always on the table. Only the sentence says which 
 | Reworded sentences | 11/16 | --- |
 | Trained on 24 / 48 / 96 demos (of 24 trials) | 14/24, 23/24, 23/24 | ---|
 
-A system that ignored the sentence would get about 9 of 36.
+A system that ignored the sentence would have a 25% chance and get about 9 of 36.
 
 ### What I found
 
 1. **On this task one SmolVLA model did as well as four specialised ACT models.** 34/36 against 36/36 is no significant difference. SmolVLA went for the named sponge in all 36 trials; both failed trials were missed grasps. This finding shows the language conditioning SmolVLA is built for: one model reads the sentence and picks the right sponge and tray.
-2. **SmolVLA still followed the sentence when I reworded it, but less reliably.** With sentences it had never seen it scored 11/16, where guessing would give about 4/16. Three of the four reworded sentences went well (10/12). The fourth, *"Place the red sponge into the tray on the left."*, scored 1/4: three times the arm went for the blue sponge.
+2. **SmolVLA still followed the sentence when I reworded it, but less reliably.** With sentences it had never seen it scored 11/16, where guessing would give about 4/16. Three of the four reworded sentences went well (10/12). The fourth, *"Place the red sponge into the tray on the left."*, scored 1/4: twice the arm went for the blue sponge, and once the grasp of the red sponge failed.
 3. **Fine-tuning on fewer demos performed equally well, but leaving out placements dropped performance.** With 48 of the 96 demos, which still cover all 12 placements, SmolVLA scored 23/24, the same as with 96. With 24 demos, which cover only 6 placements, it scored 14/24: 11/12 on the placements it had demos of and 3/12 on the six it did not. What got worse was the grasp, not following the sentence.
 
 ### Limitations and how to test them
 
-- **Picking accuracy.** 14 of the 18 failed trials in part 2 were grasp failures. A wrist camera could increase the picking accuracy.
+- **Picking accuracy.** 15 of the 18 failed trials in part 2 were grasp failures. A wrist camera could increase the picking accuracy.
 - **Language understanding.** One of the four reworded sentences scored 1/4. Testing it against its original wording, and on a bigger pretrained model (like GR00T N2 or π0.5), would show whether the wording or the model is the cause.
-- **Generalisation.** With 24 demos, SmolVLA scored 3/12 on placements outside its demos. Sponges on dots that are in no demo at all (out-of-distribution) would test this properly.
+- **Generalisation.** With 24 demos, SmolVLA scored 3/12 on placements outside its demos (out-of-distribution: new pairs of dots it had seen). Sponges on dots that are in no demo at all would test this further.
 - **Task difficulty.** Both systems scored very high, so the main test cannot show which one is better. A more complex task could.
 
 Details: [APPENDIX_PART2.md](APPENDIX_PART2.md).

@@ -43,6 +43,8 @@ matching-body case on real hardware.
 </tr>
 </table>
 
+![What the robot sees: top and side camera, at the start and at the grasp](media/camera_views.jpg)
+
 ## Demonstrations
 
 | | First recording ("rushed") | Second recording ("careful") |
