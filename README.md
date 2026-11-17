@@ -38,7 +38,7 @@ Details: [APPENDIX.md](APPENDIX.md).
 
 Two sponges and two trays are always on the table. Only the sentence says which sponge goes in which tray, for example *"Put the red sponge in the left tray."* One SmolVLA model reads the sentence. This is compared against four ACT models, each trained on the demos of one sentence and picked by the sentence. Both were trained on the same 96 demos; 6 of the 18 sponge placements were kept out of the demos for the test.
 
-<img src="media/camera_views_part2.jpg" alt="What the robot sees in part 2: top and side camera" width="560">
+https://github.com/user-attachments/assets/ecad99b5-0c54-4641-bc6d-854f919446d5
 
 | Test | SmolVLA | 4 × ACT |
 |---|---|---|
