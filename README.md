@@ -76,6 +76,4 @@ Details: [APPENDIX_PART2.md](APPENDIX_PART2.md).
 - In the main tests the models take turns in blocks of 3, in a seeded order, one attempt of 30 seconds per trial.
 - I only believe a gap if it is at least twice its margin: about 6 of 18 in part 1 and 9 of 36 in part 2.
 - Commands: [commands.md](commands.md), [commands_part2.md](commands_part2.md). Raw results: [results/](results/). Analysis: [scripts/analyze.py](scripts/analyze.py), [scripts/analyze_part2.py](scripts/analyze_part2.py).
-- Datasets on the Hugging Face Hub: [part 1, careful demos](https://huggingface.co/datasets/jaaaa000/so101_blue_sponge_v2_20261109_212801), [part 1, rushed demos](https://huggingface.co/datasets/jaaaa000/so101_blue_sponge_20261109_161302), [part 2](https://huggingface.co/datasets/jaaaa000/so101_part2).
-
-<!-- HUB: add links to the models once they are uploaded. -->
+- On the Hugging Face Hub: datasets [part 1, careful demos](https://huggingface.co/datasets/jaaaa000/so101_blue_sponge_v2_20261109_212801), [part 1, rushed demos](https://huggingface.co/datasets/jaaaa000/so101_blue_sponge_20261109_161302), [part 2](https://huggingface.co/datasets/jaaaa000/so101_part2); [the seven models](https://huggingface.co/jaaaa000).
