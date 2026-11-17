@@ -30,7 +30,7 @@ On the rushed demos ACT held the sponge in 11 of 18 trials and then froze in mid
 3. **Fewer demos hurt the grasp first.** Training on a smaller dataset (18 instead of 53 demos), SmolVLA failed to grasp the sponge in 7 trials instead of 0. Both models sometimes stood above the sponge without closing the gripper.
 4. **The models learned this blue sponge, not "a sponge".** 
 Both models failed all 8 trials with a yellow sponge, on placements where the blue one worked 8 of 8. Writing “yellow” in SmolVLA’s task sentence didn’t help (0/4).
-5. **A high success rate hid sloppy grasps.** Only 13 of 18 grasps were clean for each model in the main test. The soft sponge allowed the gripper to grab it just at the corner or from top in the middle of the sponge.
+5. **A high success rate hid messy grasps.** Only 13 of 18 grasps were clean for each model in the main test. The soft sponge allowed the gripper to grab it just at the corner or from top in the middle of the sponge.
 
 The details, every table and the full list of limitations are in [APPENDIX.md](APPENDIX.md).
 
@@ -106,19 +106,15 @@ SmolVLA scored 34/36 and the four ACT models 36/36, which is no significant diff
 With sentences it had never seen it scored 11/16, where guessing would give about 4/16. That is lower than the 34/36 with the original sentences. Three of the four reworded sentences went well (10/12). The fourth sentence, *"Place the red sponge into the tray on the left."*, scored 1/4. Here, three times the arm went for the blue sponge. With the original sentences it went correctly for the named sponge in all 36 trials.
 3. **Fine-tuning on fewer demos performed equally well, but leaving out placements dropped performance.** 
 Trained on 48 of the 96 demos, which still cover all 12 placements, SmolVLA scored 23/24, the same as with 96. Trained on 24 demos, which cover only 6 placements, it scored 14/24: 11/12 on the placements it had demos of and 3/12 on the six it did not. It still went for the named sponge in 22 of 24 trials, and 9 of its 10 failed trials were grasp failures. So what got worse was the grasp accuracy, not following the sentence.
-4. **What this test cannot say.** Both ACT and SmolVLA scored very high, so the main test cannot show which one is better. "New" placements are only new pairs of known dots, with the same sponges, trays and light.
-5. **Limitations of SmolVLA.** 
-In language understanding: one of the four reworded sentences. In generalisation: placements that were not in its demos (out-of-distribution). In picking accuracy: 14 of the 18 failed trials in part 2 were grasp failures.
 
+### Limitations and how to test them
+
+- **Picking accuracy.** 14 of the 18 failed trials in part 2 were grasp failures. A dedicated ego-centric wrist camera could increase the picking accuracy.
+- **Language understanding.** One of the four reworded sentences scored 1/4. Testing that sentence against its original wording, taking turns, would show whether the wording is the cause. Testing the reworded sentences on a bigger pretrained model (like GR00T N2 or π0.5) would show whether a larger model follows new wording better.
+- **Generalisation.** Trained on 24 demos, SmolVLA scored 3/12 on placements that were not in its training demos. The "new" placements of the main test were only new pairs of known dots. Sponges on dots that are not in the demos at all (out-of-distribution) would test this properly.
+- **Task difficulty.** Both ACT and SmolVLA scored very high, so the main test cannot show which one is better. A more complex task with more objects and sentences could.
 
 The details, every table, the corrected rows and all limitations are in [APPENDIX_PART2.md](APPENDIX_PART2.md). Every command I ran is in [commands_part2.md](commands_part2.md), and [scripts/analyze_part2.py](scripts/analyze_part2.py) computes the numbers of the table from [results/](results/).
-
-### Next
-
-- A wrist camera: 14 of the 18 failed trials in part 2 were grasp failures. A dedicated ego-centric wrist camera could increase accuracy of picking.
-- The one reworded sentence that went wrong, against its original wording, taking turns.
-- Testing the reworded sentences on a bigger pretrained model (like GR00T N2 or π0.5).
-- A more complex task with more variation: more objects and sentences, and sponges on dots that are not in the demos (out-of-distribution).
 
 The protocol and my bets were committed before recording: [protocol_part2.md](protocol_part2.md).
 
