@@ -1,10 +1,12 @@
 # ACT vs SmolVLA on a LeRobot SO-101 arm
 
-In this experiment I compare a specialist model (ACT, trained from scratch) against a robot-pretrained
-vision-language-action model (SmolVLA, fine-tuned from `lerobot/smolvla_base`) on a pick-and-place task. I do this on
-a low-cost SO-101 arm and train on my own machine.
+In this experiment I compare a specialist model (ACT, trained from scratch) against a robot-pretrained vision-language-action model (SmolVLA, fine-tuned from `lerobot/smolvla_base`) on a pick-and-place task. I do this on a low-cost SO-101 arm and train on my own machine.
 
 Task: *"Pick up the blue sponge and put it in the white tray."*
+
+The project has two parts. 
+- Part 1, below, is this task: one sponge and one sentence.
+- [Part 2](#part-2-does-the-arm-do-what-the-sentence-says) has two sponges, two trays and four sentences, and tests whether the arm does what the sentence says.
 
 https://github.com/user-attachments/assets/876e67f6-8099-4559-8161-4afa589ed562
 
@@ -66,7 +68,7 @@ More in [APPENDIX.md](APPENDIX.md#limitations).
 
 ## Next
 
-- Two sponges of different colours, with a sentence that names one: where a VLA should beat ACT.
+- Two sponges of different colours, with a sentence that names one: where a VLA should beat ACT. Done in [part 2](#part-2-does-the-arm-do-what-the-sentence-says).
 - A rigid object instead of a sponge, to see whether the sponge hid imprecise grasps.
 - Retraining with image augmentation, so small camera shifts matter less.
 
@@ -74,15 +76,16 @@ More in [APPENDIX.md](APPENDIX.md#limitations).
 <img src="media/setup.jpg" alt="The setup: SO-101 arm, top and side webcam, tray" width="420">
 
 
-_Part 2 is still work in progress..._
-
 ## Part 2: does the arm do what the sentence says?
 
-Two sponges and two trays are always on the table. Only the sentence says which sponge goes in which tray,
-for example *"Put the red sponge in the left tray."* There are four sentences.
+Part 2 tests two things: language conditioning (does SmolVLA do what the sentence says, also when I reword it?) and data efficiency (how many demos does the model need?).
 
-One SmolVLA model reads the sentence. Against it: four ACT models, one per sentence, picked by the sentence.
-Both systems were trained on the same 96 demos, with the same number of steps per model.
+Two sponges and two trays are always on the table. Only the sentence says which sponge goes in which tray, for example *"Put the red sponge in the left tray"*. There are four sentences. One SmolVLA model reads the sentence. This is compared against four ACT models, where each model is trained on the demos of one sentence and at test time is picked by the sentence.
+Both ACT and SmolVLA were trained on the same 96 demos (24 per sentence), with the same number of steps per model.
+
+One sponge lies on one of three dots on the left, the other on one of three dots on the right. That gives 18 placements: 12 are in the demos and 6 were kept out for the test.
+
+### Results
 
 | Test | SmolVLA | 4 × ACT |
 |---|---|---|
@@ -94,6 +97,28 @@ Both systems were trained on the same 96 demos, with the same number of steps pe
 | Trained on 24 / 48 / 96 demos (of 24 trials) | 14/24, 23/24, 23/24 | ---|
 
 A system that ignored the sentence has a 25 % chance of getting it right and would get about 9 of 36.
+
+### What I found
+
+1. **On this task one SmolVLA model did as well as four specialised ACT models.** 
+SmolVLA scored 34/36 and the four ACT models 36/36, which is no significant difference. SmolVLA went for the named sponge in all 36 trials; both failed trials were missed grasps. This finding shows the language conditioning SmolVLA is built for: one model reads the sentence and picks the right sponge and tray.
+2. **SmolVLA still followed the sentence when I reworded it, but less reliably.** 
+With sentences it had never seen it scored 11/16, where guessing would give about 4/16. That is lower than the 34/36 with the original sentences. Three of the four reworded sentences went well (10/12). The fourth sentence, *"Place the red sponge into the tray on the left."*, scored 1/4. Here, three times the arm went for the blue sponge. With the original sentences it went correctly for the named sponge in all 36 trials.
+3. **Fine-tuning on fewer demos performed equally well, but leaving out placements dropped performance.** 
+Trained on 48 of the 96 demos, which still cover all 12 placements, SmolVLA scored 23/24, the same as with 96. Trained on 24 demos, which cover only 6 placements, it scored 14/24: 11/12 on the placements it had demos of and 3/12 on the six it did not. It still went for the named sponge in 22 of 24 trials, and 9 of its 10 failed trials were grasp failures. So what got worse was the grasp accuracy, not following the sentence.
+4. **What this test cannot say.** Both ACT and SmolVLA scored very high, so the main test cannot show which one is better. "New" placements are only new pairs of known dots, with the same sponges, trays and light.
+5. **Limitations of SmolVLA.** 
+In language understanding: one of the four reworded sentences. In generalisation: placements that were not in its demos (out-of-distribution). In picking accuracy: 14 of the 18 failed trials in part 2 were grasp failures.
+
+
+The details, every table, the corrected rows and all limitations are in [APPENDIX_PART2.md](APPENDIX_PART2.md). Every command I ran is in [commands_part2.md](commands_part2.md), and [scripts/analyze_part2.py](scripts/analyze_part2.py) computes the numbers of the table from [results/](results/).
+
+### Next
+
+- A wrist camera: 14 of the 18 failed trials in part 2 were grasp failures. A dedicated ego-centric wrist camera could increase accuracy of picking.
+- The one reworded sentence that went wrong, against its original wording, taking turns.
+- Testing the reworded sentences on a bigger pretrained model (like GR00T N2 or π0.5).
+- A more complex task with more variation: more objects and sentences, and sponges on dots that are not in the demos (out-of-distribution).
 
 The protocol and my bets were committed before recording: [protocol_part2.md](protocol_part2.md).
 
