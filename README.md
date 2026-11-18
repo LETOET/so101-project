@@ -59,7 +59,7 @@ A system that ignored the sentence would have a 25% chance and get about 9 of 36
 
 ### Limitations and how to test them
 
-- **Picking accuracy.** 15 of the 18 failed trials in part 2 were grasp failures. A wrist camera could increase the picking accuracy.
+- **Picking accuracy.** 15 of the 18 failed trials in part 2 were grasp failures. 8 of them came from the 24-demo model on placements it had no demos of, this had a data cause because more demos repaired that. 3 failures came with reworded sentences. The other 4 were spread over 84 trials, about 1 in 20. A wrist camera could increase the picking accuracy. Testing this needs an object that is harder to grasp or many more trials to notice a difference.
 - **Language understanding.** One of the four reworded sentences scored 1/4. Testing it against its original wording, and on a bigger pretrained model (like OpenVLA or π0.5), would show whether the wording or the model is the cause.
 - **Generalisation.** With 24 demos, SmolVLA scored 3/12 on placements outside its demos (out-of-distribution: new pairs of dots it had seen). Sponges on dots that are in no demo at all would test this further.
 - **Task difficulty.** Both systems scored very high, so the main test cannot show which one is better. A more complex task could.

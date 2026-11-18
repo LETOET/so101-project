@@ -184,9 +184,34 @@ wrong tray. Two of the three were on one reworded sentence, so this is too littl
 After the test I went through the 18 failed trials with two questions: what kind of failure was it, and was the
 placement in the demos of the model that ran it?
 
+- **Kind of failure:** 15 of the 18 failures were at the grasp, 3 were the wrong sponge.
+- **Grasp:** 8 of the 15 grasp failures came from the 24-demo model on placements it had no demos of.
+- **Placement:** missing placements explain the failures of the 24-demo model (9 of 10), but not those of the 96-demo model (6 of 7 were on placements it had demos of).
+- **Wording:** 5 of the 96-demo model's 7 failures came with a reworded sentence.
+
 **Kind of failure.** 15 of the 18 were grasp failures (execution failures): the arm did not pick the sponge up.
 In 14 of them it went for the named sponge, in one (fewer-demos trial 47) it came down between the two sponges.
 The other 3 were instruction-following failures: the arm went for the wrong sponge.
+
+**Grasp failure.**
+
+The 15 grasp failures, by the situation they happened in and by my two codes for them:
+
+| Situation | Missed approach (A) | Failed grasp (G) | Grasp failures (total) | Trials |
+|---|---|---|---|---|
+| 24-demo model, placement outside its demos | 6 | 2 | 8 | 12 |
+| Reworded sentence (96-demo model) | 1 | 2 | 3 | 16 |
+| All other SmolVLA trials | 4 | 0 | 4 | 84 |
+
+- **More than half have a data cause.** 8 of the 15 came from the 24-demo model on placements it had no demos
+  of. The 48-demo model, which has demos of those placements, scored 11/12 on them.
+- **Reworded sentences: 3 in 16 trials (trials 3, 14 and 15).** The same model did the placements of trials 14 and 15 twice each with the trained sentence and succeeded every time (main test trials 40 and 53, fewer-demos trials 38 and 52). So the placement was not the problem. For trial 3 there is no such comparison. A possible reason is that the new wording makes the grasp less sure. This would take more trials to prove.
+- **What is left is 4 in 84 trials, about 1 in 20:** 2 in the 36 trials of the main test, 1 in the 24 of the
+  48-demo model, 1 in the 12 of the 24-demo model on its own placements, and none in the 12 repeats of the
+  96-demo model. 3 of the 4 were on placements the model had demos of. All 4 were missed approaches (A), none a
+  failed grasp (G). A missed approach is a matter of position, which is where a wrist camera might help.
+- **So on this task more demos repaired most grasp failures.** With about 1 in 20 left there is too little to
+  study the grasp itself. That needs a harder object, such as the rigid one named in part 1's limitations.
 
 **Placement.**
 
@@ -213,9 +238,6 @@ The other 3 were instruction-following failures: the arm went for the wrong spon
   placement was not the problem. What differed was the wording, and that the reworded trials ran last that
   evening. Both times the arm went to the left tray, the named one: it followed "left" but not "red". On the
   video it went straight to the blue sponge in trial 6. In trial 5 it hesitated between the two sponges first.
-- **Grasp failures with a reworded sentence (trials 14 and 15).** With the trained sentence the same model
-  succeeded twice on each of these placements. The new wording may also make the grasp less sure, but with so
-  few trials that is a guess.
 
 All of this follows from [part2_demo_order.csv](results/part2_demo_order.csv) (the columns `in_48` and `in_24`
 say which demos the smaller sets hold) and the three trial files.
@@ -324,7 +346,9 @@ No score depends on these runs.
   [Cameras and light](#cameras-and-light)).
 - **Pilot tries:** 12 uncounted tries on 14 November (4 ACT, 8 SmolVLA) fixed SmolVLA's `execution_horizon`
   (listed in the protocol).
-- **Grasp:** most failures were at the grasp. Depth is hard to see in the side camera's picture, and a wrist camera
+- **Grasp:** most failures were at the grasp (15 of 18). More than half of them came from missing demos, and what
+  is left is about 1 in 20 trials: too few to study the grasp on this task (see
+  [Failure analysis](#failure-analysis)). Depth is hard to see in the side camera's picture, and a wrist camera
   might help. I did not test that.
 - **No image augmentation** during training, as in part 1.
 
