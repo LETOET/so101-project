@@ -179,6 +179,47 @@ and F did not occur.
 there was no word mistake at all. Over all 148 trials the arm went for the wrong sponge 3 times and never to the
 wrong tray. Two of the three were on one reworded sentence, so this is too little to say more.
 
+### Failure analysis
+
+After the test I went through the 18 failed trials with two questions: what kind of failure was it, and was the
+placement in the demos of the model that ran it?
+
+**Kind of failure.** 15 of the 18 were grasp failures (execution failures): the arm did not pick the sponge up.
+In 14 of them it went for the named sponge, in one (fewer-demos trial 47) it came down between the two sponges.
+The other 3 were instruction-following failures: the arm went for the wrong sponge.
+
+**Placement.**
+
+| Failed trials | SmolVLA trained on | Kind of failure | Placement in its demos |
+|---|---|---|---|
+| Main test 5 | 96 demos | grasp | yes |
+| Main test 55 | 96 demos | grasp | no, kept out |
+| Reworded 3, 14, 15 | 96 demos | grasp | yes |
+| Reworded 5, 6 | 96 demos | wrong sponge | yes |
+| Fewer demos 11 | 48 demos | grasp | yes |
+| Fewer demos 1 | 24 demos | grasp | yes |
+| Fewer demos 3, 28, 31, 32, 33, 43, 46, 47 | 24 demos | grasp | no |
+| Fewer demos 58 | 24 demos | wrong sponge | no |
+
+- **24-demo model: missing placements explain most of its failures.** 9 of its 10 failures were on placements
+  outside its demos. In each of them the named sponge lay on a dot where it was picked up in a demo. Only the
+  other sponge lay somewhere new.
+- **96-demo model: missing placements do not explain its failures.** 6 of its 7 failures were on placements it
+  had two demos of per sentence. 5 of the 7 were grasp failures and 2 the wrong sponge.
+- **The colour order does not explain them either.** Whenever a placement was in the demos, the same two dots
+  with the colours swapped were in them too, for every sentence. No model saw only one colour order.
+- **Wrong sponge with a reworded sentence (trials 5 and 6).** The same model did the placement of trial 6 twice
+  with the trained sentence and succeeded both times (main test trial 41, fewer-demos trial 39). So the
+  placement was not the problem. What differed was the wording, and that the reworded trials ran last that
+  evening. Both times the arm went to the left tray, the named one: it followed "left" but not "red". On the
+  video it went straight to the blue sponge in trial 6. In trial 5 it hesitated between the two sponges first.
+- **Grasp failures with a reworded sentence (trials 14 and 15).** With the trained sentence the same model
+  succeeded twice on each of these placements. The new wording may also make the grasp less sure, but with so
+  few trials that is a guess.
+
+All of this follows from [part2_demo_order.csv](results/part2_demo_order.csv) (the columns `in_48` and `in_24`
+say which demos the smaller sets hold) and the three trial files.
+
 ### Is the difference significant?
 
 | Comparison | Numbers | My rule | Exact test | Planned before the test |
