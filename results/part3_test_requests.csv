@@ -1,0 +1,58 @@
+nr,kind,request,sponge,tray
+1,1,Could you move the red sponge over to the left-hand tray?,red,left
+2,1,blue sponge goes in the tray on the right please,blue,right
+3,1,Take the blue one and drop it in the left container.,blue,left
+4,1,I want the red sponge in the right tray.,red,right
+5,1,Please place the red one into the box on the left side.,red,left
+6,1,Grab the blue sponge and put it in the right-hand tray.,blue,right
+7,1,The left tray needs the blue sponge.,blue,left
+8,1,Pick up the red sponge and set it down in the right tray.,red,right
+9,1,Can the sky-coloured sponge go into the left bin?,blue,left
+10,1,Put the sponge that is red like a tomato in the left tray.,red,left
+11,1,Bring the blue sponge to the tray on the right side.,blue,right
+12,1,Red sponge: right tray.,red,right
+13,2,Put the sponge on the left into the right tray.,left,right
+14,2,Move the right-hand sponge to the left tray.,right,left
+15,2,Take the sponge that is closest to the left tray and put it in that tray.,left,left
+16,2,The sponge lying on the right side should go in the right tray.,right,right
+17,2,Pick up the left sponge and drop it in the tray on the left.,left,left
+18,2,Could you put the sponge nearest the right tray into the left tray?,right,left
+19,2,Grab the sponge next to the left tray and bring it to the right tray.,left,right
+20,2,Place the sponge on the right into the tray on the right.,right,right
+21,2,I need the leftmost sponge in the right-hand container.,left,right
+22,2,Move the sponge that is furthest to the right into the left box.,right,left
+23,2,The sponge beside the right tray goes into the right tray.,right,right
+24,2,Put the sponge that lies on the left side of the table in the left tray.,left,left
+25,4,Drop the blue sponge in the tray that has the tea next to it.,blue,tea
+26,4,The red sponge belongs in the tray beside the Strepsils box.,red,strepsils
+27,4,Move the red sponge to the tray with the roll of tape.,red,tape
+28,4,Put the blue sponge into the tray next to the calculator.,blue,calculator
+29,4,Place the red sponge in the tray by the thing you would put in a cup of hot water.,red,tea
+30,4,Take the blue sponge to the tray next to what you take for a sore throat.,blue,strepsils
+31,4,Put the blue sponge in the tray beside what you would use to seal a cardboard box.,blue,tape
+32,4,The red sponge goes in the tray near the device that helps you multiply big numbers.,red,calculator
+33,4,Could you put the blue sponge in the tray where the tea bag is?,blue,tea
+34,4,Red sponge into the tray by the throat lozenges please.,red,strepsils
+35,4,Bring the red sponge to the tray marked by the tape.,red,tape
+36,4,Set the blue sponge down in the tray that has the calculator beside it.,blue,calculator
+37,3,Put the yellow sponge in the right tray.,,
+38,3,Place the blue sponge on top of the red sponge.,,
+39,3,Move the red sponge into the third tray.,,
+40,3,Hand me the blue sponge.,,
+41,3,Swap the two trays.,,
+42,3,Wipe the table with the blue sponge.,,
+43,5,Put the sponge on the left into the tray that has the calculator next to it.,left,calculator
+44,5,Take the sponge lying on the right and drop it in the tray by the tea.,right,tea
+45,5,The sponge nearest the left tray should go to the tray beside the roll of tape.,left,tape
+46,5,Put the sponge that is not red into the left tray.,blue,left
+47,5,Put the red sponge in the tray that does not have the tape next to it.,red,not-tape
+48,5,Move the sponge that is not on the left into the tray without the Strepsils box.,right,not-strepsils
+49,5,Put the blue sponge in the tray next to the apple.,,
+50,5,Put the green sponge in the tray with the tea.,,
+51,5,Move the red sponge to the tray beside the scissors.,,
+52,5,Pick up the sponge that lies nearest the calculator and put it in the tray on the other side from the calculator.,at-calculator,not-calculator
+53,5,Put the sponge that is closest to the robot arm into the tray with the tea.,near-robot,tea
+54,5,The sponge that is furthest from the Strepsils box should go into the tray beside the Strepsils box.,not-at-strepsils,strepsils
+55,5,Take the red sponge to whichever tray is further away from where it lies now.,red,far-red
+56,5,The blue sponge should go into the tray nearest to it.,blue,near-blue
+57,5,Put the sponge that lies closest to the tea into the tray furthest from that sponge.,at-tea,not-tea
