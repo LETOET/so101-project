@@ -1,6 +1,6 @@
 # ACT vs SmolVLA on a LeRobot SO-101 arm
 
-I compare a specialist model (ACT, trained from scratch) against a robot-pretrained vision-language-action model (SmolVLA, fine-tuned from `lerobot/smolvla_base`) on pick-and-place tasks, on a low-cost SO-101 arm, trained on my own machine.
+I compare a specialist model (ACT) against a robot-pretrained vision-language-action model (SmolVLA, fine-tuned from `lerobot/smolvla_base`) on pick-and-place tasks, on a low-cost SO-101 arm, trained on my own machine.
 
 - **[Part 1](#part-1-one-sponge-one-sentence): Experiment with one sponge and one sentence.** Analysing model choice, data quality and data efficiency. 
 - **[Part 2](#part-2-does-the-arm-do-what-the-sentence-says): Experiment with two sponges, two trays and four sentences.** Analysing language conditioning and data efficiency.
@@ -74,14 +74,18 @@ A system that ignored the sentence would have a 25% chance and get about 9 of 36
 
 Details: [APPENDIX_PART2.md](APPENDIX_PART2.md).
 
-## Setup and method
+## Setup
 
 <img src="media/setup_both.jpg" alt="The setup of part 1 (left) and part 2 (right)" width="640">
 
 - SO-101 follower arm, teleoperated with a leader arm. 
 - Two Logitech C270 webcams (top and side), no wrist camera.
+- Computer: one PC for teleoperation, training and testing, with an NVIDIA RTX 3060 (12 GB VRAM), an Intel Core i5-6500 (4 cores) and 32 GB RAM, on Ubuntu 22.04.
 - ACT has 52 M parameters, SmolVLA 450 M (100 M trained). 
-- Same number of training steps for both models, on one RTX 3060 (12 GB) (part 1: 30000 steps, part 2: 46000 steps, batch size: 8)
+- Same number of training steps for both models (part 1: 30000 steps, part 2: 46000 steps, batch size: 8).
+- One training run took about 2.5 h (ACT) or 3 h (SmolVLA) in part 1, and about 4 h (for each ACT model) or 5 h (SmolVLA) in part 2.
+
+## Method
 - Both protocols ([protocol.md](protocol.md), [protocol_part2.md](protocol_part2.md)) were committed before the models were trained, with a bet before each test.
 - In the main tests the models take turns in blocks of 3, in a seeded order, one attempt of 30 seconds per trial.
 - Statistical threshold: a gap is only treated as real if it is at least twice its margin (~6/18 in Part 1, ~9/36 in Part 2)
