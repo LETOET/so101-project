@@ -6,6 +6,7 @@ I compare a specialist model (ACT, trained from scratch) against a robot-pretrai
 - **[Part 2](#part-2-does-the-arm-do-what-the-sentence-says): Experiment with two sponges, two trays and four sentences.** Analysing language conditioning and data efficiency.
 
 https://github.com/user-attachments/assets/876e67f6-8099-4559-8161-4afa589ed562
+
 *Part 1: ACT vs SmolVLA*
 
 ## Part 1: one sponge, one sentence
@@ -44,6 +45,7 @@ Details: [APPENDIX.md](APPENDIX.md).
 Two sponges and two trays are always on the table. Only the sentence says which sponge goes in which tray, for example *"Put the red sponge in the left tray."* One SmolVLA model reads the sentence. This is compared against four ACT models, each trained on the demos of one sentence and picked by the sentence. Both were trained on the same 96 demos; 6 of the 18 sponge placements were kept out of the demos for the test.
 
 https://github.com/user-attachments/assets/ecad99b5-0c54-4641-bc6d-854f919446d5
+
 *Part 2: language-conditioned pick-and-place.*
 
 | Test | SmolVLA | 4 × ACT |
