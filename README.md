@@ -6,6 +6,7 @@ I compare a specialist model (ACT, trained from scratch) against a robot-pretrai
 - **[Part 2](#part-2-does-the-arm-do-what-the-sentence-says): Experiment with two sponges, two trays and four sentences.** Analysing language conditioning and data efficiency.
 
 https://github.com/user-attachments/assets/876e67f6-8099-4559-8161-4afa589ed562
+*Part 1: ACT vs SmolVLA*
 
 ## Part 1: one sponge, one sentence
 
@@ -20,17 +21,21 @@ The task is always the same sentence: *"Pick up the blue sponge and put it in th
 
 Each model got the same 18 placements of the sponge (9 dots, each straight and turned 45°).
 
-### What I found
+### Findings
 
-1. **On this task both models scored about equally well.** 16/18 against 18/18 is no significant difference and neither is 13/18 against 11/18 with 18 demos.
-2. **How I recorded the demos mattered more than the model.** After I recorded my rushed first demos again, slower and more carefully, SmolVLA went from 7/18 to 18/18 and ACT from 0/18 to 16/18 (the light also changed).
-3. **Fewer demos hurt the grasp first.** With 18 instead of 53 demos, SmolVLA failed to grasp the sponge in 7 trials instead of 0.
-4. **The models learned this blue sponge, not "a sponge".** Both failed all 8 trials with a yellow sponge, on placements where the blue one worked 8 of 8. Writing “yellow” in SmolVLA’s sentence didn’t help (0/4).
+1. **On this task both models scored about equally well.** 
+A score of 16/18 against 18/18 is no significant difference and neither is 13/18 against 11/18 when training on less data (18 demos). In the main test both models are at the ceiling, most likely because the task is fairly simple and all placements were in-distribution. So this task doesn’t test the language and generalisation the bigger pretrained SmolVLA is built for.
+2. **How I recorded the demos mattered more than the model.** My first recorded demos were a bit rushed and fast like a human would do it. After I recorded my rushed first demos again, now slower and more carefully, SmolVLA went from 7/18 to 18/18 and ACT from 0/18 to 16/18. This suggests the importance of good demonstration quality for imitation learning policies.
+3. **Training on fewer demos hurt the grasp first.** 
+Training on a smaller dataset (18 instead of 53 demos), SmolVLA failed to grasp the sponge in 7 trials instead of 0, and ACT failed 5 trials instead of 2. Both models sometimes froze above the sponge without closing the gripper. Showing that the grasp is the more vulnerable part of the whole task.
+4. **The models learned this blue sponge, not "a sponge".** Both models failed all 8 trials with a yellow sponge, on placements where the blue one worked 8 of 8. Writing “yellow” in SmolVLA’s task sentence didn’t help (0/4).
 
 ### Limitations and how to test them
 
-- **Task difficulty.** This task has limited variation: one object, one sentence and every test placement in the demos. It doesn't test the language and generalisation SmolVLA is built for. A more complex task is tested in [Part 2](#part-2-does-the-arm-do-what-the-sentence-says).
-- **Grasp quality.** Only 13 of 18 grasps were clean for each model; the soft sponge let messy grasps succeed. A rigid object would show whether it hid imprecise grasps.
+- **Task difficulty.** 
+This task has limited variation: one object, one sentence and every test placement in the training distribution. It doesn't test the language and generalisation SmolVLA is built for. A more complex task is tested in [Part 2](#part-2-does-the-arm-do-what-the-sentence-says).
+- **Grasp quality.** 
+Only 13 of 18 grasps were clean for each model in the main test. In 8 more trials the gripper came down on top of the sponge or at its edge, and the soft sponge still allowed the grasp to succeed. A rigid object instead of a sponge would show whether the sponge hid imprecise grasps.
 
 Details: [APPENDIX.md](APPENDIX.md).
 
@@ -39,6 +44,7 @@ Details: [APPENDIX.md](APPENDIX.md).
 Two sponges and two trays are always on the table. Only the sentence says which sponge goes in which tray, for example *"Put the red sponge in the left tray."* One SmolVLA model reads the sentence. This is compared against four ACT models, each trained on the demos of one sentence and picked by the sentence. Both were trained on the same 96 demos; 6 of the 18 sponge placements were kept out of the demos for the test.
 
 https://github.com/user-attachments/assets/ecad99b5-0c54-4641-bc6d-854f919446d5
+*Part 2: language-conditioned pick-and-place.*
 
 | Test | SmolVLA | 4 × ACT |
 |---|---|---|
@@ -51,7 +57,7 @@ https://github.com/user-attachments/assets/ecad99b5-0c54-4641-bc6d-854f919446d5
 
 A system that ignored the sentence would have a 25% chance and get about 9 of 36.
 
-### What I found
+### Findings
 
 1. **On this task one SmolVLA model did as well as four specialised ACT models.** 34/36 against 36/36 is no significant difference. SmolVLA went for the named sponge in all 36 trials; both failed trials were missed grasps. This finding shows the language conditioning SmolVLA is built for: one model reads the sentence and picks the right sponge and tray.
 2. **SmolVLA still followed the sentence when I reworded it, but less reliably.** With sentences it had never seen it scored 11/16, where guessing would give about 4/16. Three of the four reworded sentences went well (10/12). The fourth, *"Place the red sponge into the tray on the left."*, scored 1/4: twice the arm went for the blue sponge, and once the grasp of the red sponge failed.
@@ -59,7 +65,7 @@ A system that ignored the sentence would have a 25% chance and get about 9 of 36
 
 ### Limitations and how to test them
 
-- **Picking accuracy.** 15 of the 18 failed trials in part 2 were grasp failures. 8 of them came from the 24-demo model on placements it had no demos of, this had a data cause because more demos repaired that. 3 failures came with reworded sentences. The other 4 were spread over 84 trials, about 1 in 20. A wrist camera could increase the picking accuracy. Testing this needs an object that is harder to grasp or many more trials to notice a difference.
+- **Picking accuracy.** 15 of the 18 failed trials in part 2 were grasp failures. 8 of them came from the 24-demo model on placements it had no demos of. This had a data cause because more demos repaired that. 3 failures came with reworded sentences. The other 4 were spread over 84 trials, about 1 in 20. A wrist camera could increase the picking accuracy. Testing this needs an object that is harder to grasp or many more trials to notice a difference.
 - **Language understanding.** One of the four reworded sentences scored 1/4. Testing it against its original wording, and on a bigger pretrained model (like OpenVLA or π0.5), would show whether the wording or the model is the cause.
 - **Generalisation.** With 24 demos, SmolVLA scored 3/12 on placements outside its demos (out-of-distribution: new pairs of dots it had seen). Sponges on dots that are in no demo at all would test this further.
 - **Task difficulty.** Both systems scored very high, so the main test cannot show which one is better. A more complex task could.
@@ -70,10 +76,25 @@ Details: [APPENDIX_PART2.md](APPENDIX_PART2.md).
 
 <img src="media/setup_both.jpg" alt="The setup of part 1 (left) and part 2 (right)" width="640">
 
-- SO-101 follower arm, teleoperated with a leader arm. Two Logitech C270 webcams (top and side), no wrist camera.
-- ACT has 52 M parameters, SmolVLA 450 M (100 M trained). Same number of training steps for both, on one RTX 3060 (12 GB), with [LeRobot](https://github.com/huggingface/lerobot) 0.6.0.
+- SO-101 follower arm, teleoperated with a leader arm. 
+- Two Logitech C270 webcams (top and side), no wrist camera.
+- ACT has 52 M parameters, SmolVLA 450 M (100 M trained). 
+- Same number of training steps for both models, on one RTX 3060 (12 GB) (part 1: 30000 steps, part 2: 46000 steps, batch size: 8)
 - Both protocols ([protocol.md](protocol.md), [protocol_part2.md](protocol_part2.md)) were committed before the models were trained, with a bet before each test.
 - In the main tests the models take turns in blocks of 3, in a seeded order, one attempt of 30 seconds per trial.
-- I only believe a gap if it is at least twice its margin: about 6 of 18 in part 1 and 9 of 36 in part 2.
+- Statistical threshold: a gap is only treated as real if it is at least twice its margin (~6/18 in Part 1, ~9/36 in Part 2)
 - Commands: [commands.md](commands.md), [commands_part2.md](commands_part2.md). Raw results: [results/](results/). Analysis: [scripts/analyze.py](scripts/analyze.py), [scripts/analyze_part2.py](scripts/analyze_part2.py).
-- On the Hugging Face Hub: datasets [part 1, careful demos](https://huggingface.co/datasets/jaaaa000/so101_blue_sponge_v2_20261109_212801), [part 1, rushed demos](https://huggingface.co/datasets/jaaaa000/so101_blue_sponge_20261109_161302), [part 2](https://huggingface.co/datasets/jaaaa000/so101_part2); [the seven models](https://huggingface.co/jaaaa000).
+
+
+## Datasets and models
+
+All data and the seven trained models are public on the Hugging Face Hub:
+
+- [Part 1 – careful demos](https://huggingface.co/datasets/jaaaa000/so101_blue_sponge_v2_20261109_212801)
+- [Part 1 – rushed demos](https://huggingface.co/datasets/jaaaa000/so101_blue_sponge_20261109_161302)
+- [Part 2](https://huggingface.co/datasets/jaaaa000/so101_part2)
+- [All models](https://huggingface.co/jaaaa000)
+
+---
+
+Trained with [LeRobot](https://github.com/huggingface/lerobot) 0.6.0.
